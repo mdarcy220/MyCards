@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/MyCards.iml" filepath="$PROJECT_DIR$/MyCards.iml" />
       <module fileurl="file:///mnt/4ad1c2cb-209a-4390-886f-5a3b5cdf8a0a/mike/grampro/android/AndroidStudioProjects/MyCards/MyCards.iml" filepath="/mnt/4ad1c2cb-209a-4390-886f-5a3b5cdf8a0a/mike/grampro/android/AndroidStudioProjects/MyCards/MyCards.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file:///mnt/4ad1c2cb-209a-4390-886f-5a3b5cdf8a0a/mike/grampro/android/AndroidStudioProjects/MyCards/app/app.iml" filepath="/mnt/4ad1c2cb-209a-4390-886f-5a3b5cdf8a0a/mike/grampro/android/AndroidStudioProjects/MyCards/app/app.iml" />
     </modules>
   </component>
