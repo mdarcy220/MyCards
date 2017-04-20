@@ -22,13 +22,28 @@
 
         <service
             android:name=".NotificationService"
-            android:enabled="true"></service>
+            android:enabled="true" />
 
-        <activity
-            android:name=".SettingsActivity">
+        <activity android:name=".SettingsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.group13.androidsdk.mycards.MainActivity"/>
+                android:value="com.group13.androidsdk.mycards.MainActivity" />
+        </activity>
+        <activity android:name=".NotificationRulesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.group13.androidsdk.mycards.SettingsActivity" />
+        </activity>
+        <activity android:name=".BrowseCardsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.group13.androidsdk.mycards.MainActivity" />
+        </activity>
+        <activity android:name=".ViewCardActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.group13.androidsdk.mycards.BrowseCardsActivity"
+                />
         </activity>
     </application>
 
