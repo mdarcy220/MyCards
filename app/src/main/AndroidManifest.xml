@@ -47,13 +47,27 @@
         <activity android:name=".EditCardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.group13.androidsdk.mycards.EditCardActivity"
-                />
+                android:value="com.group13.androidsdk.mycards.ViewCardActivity" />
         </activity>
         <activity android:name=".CardStatsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.group13.androidsdk.mycards.ViewCardActivity"
+                android:value="com.group13.androidsdk.mycards.ViewCardActivity" />
+        </activity>
+        <activity android:name=".NewCardActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".BrowseCardsActivity" />
+        </activity>
+        <activity android:name=".ReviewCategoryActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.group13.androidsdk.mycards.MainActivity" />
+        </activity>
+        <activity android:name=".ReviewFrontActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.group13.androidsdk.mycards.ReviewCategoryActivity"
                 />
         </activity>
     </application>
