@@ -15,10 +15,93 @@
   ~ limitations under the License.
   -->
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bkgrnd_with_border"
+    android:orientation="vertical"
     tools:context="com.group13.androidsdk.mycards.EditCardActivity">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="32dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/small_logo"/>
+    <TextView
+        android:id="@+id/tvEditCardText"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:background="#FFFFFF"
+        android:hint="Edit"
+        android:padding="36dp"
+        android:textColor="#29c99d"
+        />
+    <Button
+        android:id="@+id/btnEditFlipCard"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="8dp"
+        android:background="#FFFFFF"
+        android:text="flip Card"
+        android:textColor="#29c99d"
+        android:textSize="10sp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnCancelEdit"
+            android:layout_width="60dp"
+            android:layout_height="25dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:text="Cancel"
+            android:textColor="#29c99d"
+            android:textSize="10sp"/>
+        <Button
+            android:id="@+id/btnSaveEdit"
+            android:layout_width="60dp"
+            android:layout_height="25dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:text="Save"
+            android:textColor="#29c99d"
+            android:textSize="10sp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:background="#ffffff"
+            android:text="tags:"
+            android:textColor="#26c99d"
 
-</android.support.constraint.ConstraintLayout>
+            />
+        <TextView
+            android:id="@+id/tvEditTags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:background="#ffffff"
+            android:hint="tags                                       "
+            android:textColor="#26c99d"/>
+    </LinearLayout>
+
+</LinearLayout>
+
