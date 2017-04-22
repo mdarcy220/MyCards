@@ -21,7 +21,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bkgrnd_with_border"
     android:orientation="vertical"
-    tools:context="com.group13.androidsdk.mycards.BrowseCardsActivity">
+    tools:context="com.group13.androidsdk.mycards.CardStatsActivity">
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,27 +30,23 @@
         android:layout_marginTop="64dp"
         android:src="@drawable/small_logo"/>
     <Button
-        android:id="@+id/btnNewCard"
+        android:id="@+id/btnCardTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="#FFFFFF"
-        android:text="Add new card"
-        android:textColor="#26c99d"
+        android:layout_marginBottom="8dp"
+        android:background="#ffffff"
+        android:textColor="29c99d"
         />
-    <Spinner
-        android:id="@+id/spinTags"
+    <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"></Spinner>
-    <ListView
-        android:id="@+id/lvCards"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="64dp"
-        android:layout_marginRight="64dp"
-        android:background="#FFFFFF">
-
-    </ListView>
+        android:layout_gravity="center"
+        android:columnCount="2"
+        android:rowCount="5">
+        <TextView
+            android:layout_width=""
+            />
+    </GridLayout>
 
 </LinearLayout>
