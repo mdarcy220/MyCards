@@ -67,7 +67,12 @@
         <activity android:name=".ReviewFrontActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.group13.androidsdk.mycards.ReviewCategoryActivity"
+                android:value="com.group13.androidsdk.mycards.ReviewCategoryActivity" />
+        </activity>
+        <activity android:name=".ReviewBackActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.group13.androidsdk.mycards.ReviewFrontActivity"
                 />
         </activity>
     </application>
