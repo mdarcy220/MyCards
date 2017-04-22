@@ -52,7 +52,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginRight="4dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/btnBack"/>
+            android:background="@drawable/btn_back"/>
         <Button
             android:id="@+id/btnFlipCard"
             android:layout_width="60dp"
@@ -85,7 +85,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="4dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/btnNext"/>
+            android:background="@drawable/btn_next"/>
 
     </LinearLayout>
     <LinearLayout
@@ -103,7 +103,7 @@
             android:layout_height="25dp"
             android:layout_marginBottom="8dp"
             android:layout_marginRight="4dp"
-            android:background="@drawable/btnDeleteCard"/>
+            android:background="@drawable/btn_delete"/>
         <Button
             android:id="@+id/btnEdit"
             android:layout_width="30dp"
@@ -111,7 +111,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="4dp"
-            android:background="@drawable/btnEditCard"/>
+            android:background="@drawable/btn_edit"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"

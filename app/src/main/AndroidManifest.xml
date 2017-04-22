@@ -42,9 +42,9 @@
         <activity android:name=".ViewCardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.group13.androidsdk.mycards.BrowseCardsActivity"
-                />
+                android:value="com.group13.androidsdk.mycards.BrowseCardsActivity" />
         </activity>
+        <activity android:name=".EditCardActivity"></activity>
     </application>
 
 </manifest>
