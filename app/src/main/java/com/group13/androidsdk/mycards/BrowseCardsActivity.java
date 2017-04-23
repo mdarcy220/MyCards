@@ -16,6 +16,7 @@
 
 package com.group13.androidsdk.mycards;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -26,6 +27,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -40,11 +42,29 @@ public class BrowseCardsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse_cards);
+    }
 
-        //System.out.println(MyCardsDBManager.getInstance(this).getAllCards()[0].getFrontText());
-        CardArrayAdapter cardAdapter = new CardArrayAdapter(this, R.layout.browse_cards_listitem, MyCardsDBManager.getInstance(this).getAllCards());
-        ((ListView)findViewById(R.id.listViewCards)).setAdapter(cardAdapter);
-        cardAdapter.notifyDataSetChanged();
+    private void initListView() {
+        final Card[] cards = MyCardsDBManager.getInstance(this).getAllCards();
+        CardArrayAdapter cardAdapter = new CardArrayAdapter(this, R.layout.browse_cards_listitem, cards);
+        ListView listView = ((ListView)findViewById(R.id.listViewCards));
+        listView.setAdapter(cardAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Card c = cards[position];
+                Intent intent = new Intent(BrowseCardsActivity.this, EditCardActivity.class);
+                intent.putExtra("cardId", c.getId());
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initListView();
     }
 
     @Override
@@ -58,7 +78,10 @@ public class BrowseCardsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.new_card_appbar_button:
-                System.out.println("HELLO, APPBAR");
+                Card c = new Card("", "");
+                Intent intent = new Intent(BrowseCardsActivity.this, EditCardActivity.class);
+                intent.putExtra("cardId", c.getId());
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -82,7 +105,6 @@ class CardArrayAdapter extends ArrayAdapter<Card> {
         super(context, resource);
         this.values = values;
         this.context = context;
-        System.out.println("test2");
     }
 
     @Override

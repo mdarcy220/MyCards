@@ -18,12 +18,82 @@ package com.group13.androidsdk.mycards;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import java.util.Date;
 
 public class EditCardActivity extends AppCompatActivity {
+
+    private Card card = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_card);
+
+        int cardId = this.getIntent().getExtras().getInt("cardId");
+        card = MyCardsDBManager.getInstance(this).getCardById(cardId);
+        if(card == null) {
+            card = new Card("", "");
+        }
+        loadCardToLayout(card);
+    }
+
+    private void loadCardToLayout(Card c) {
+        if(c == null) {
+            return;
+        }
+        ((EditText) findViewById(R.id.tvEditCardFrontText)).setText(c.getFrontText());
+        ((EditText) findViewById(R.id.tvEditCardBackText)).setText(c.getBackText());
+        String tagStr = "";
+        for (String tag : c.getTags()) {
+            tagStr += tag + ", ";
+        }
+        // Remove the final comma
+        if (tagStr.length() > 2) {
+            tagStr = tagStr.substring(0, tagStr.length() - 2);
+        }
+        ((EditText) findViewById(R.id.tvEditTags)).setText(tagStr);
+    }
+
+    private void saveLayoutToCard(Card c) {
+        if (c == null) {
+            return;
+        }
+        c.setFrontText(((EditText) findViewById(R.id.tvEditCardFrontText)).getText().toString());
+        c.setBackText(((EditText) findViewById(R.id.tvEditCardBackText)).getText().toString());
+
+        String tagStr = ((EditText) findViewById(R.id.tvEditTags)).getText().toString();
+        String[] tagStrs = tagStr.split(",");
+        c.clearTags();
+        for(String tag : tagStrs) {
+            tag.trim();
+            if(!tag.equals("")) {
+                c.addTag(tag);
+            }
+        }
+    }
+
+
+    public void onCancelAction(View v) {
+        this.finish();
+    }
+
+
+    public void onDeleteAction(View v) {
+        if(this.card != null) {
+            MyCardsDBManager.getInstance(this).deleteCardById(this.card.getId());
+        }
+        this.finish();
+    }
+
+    public void onSaveAction(View v) {
+        if(this.card != null) {
+            saveLayoutToCard(this.card);
+            MyCardsDBManager.getInstance(this).insertOrUpdateCard(this.card);
+        }
+        this.finish();
     }
 }

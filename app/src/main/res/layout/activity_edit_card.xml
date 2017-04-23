@@ -15,94 +15,131 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.group13.androidsdk.mycards.EditCardActivity">
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="32dp"
-        android:layout_marginTop="64dp"
-        android:src="@drawable/small_logo"/>
+
     <TextView
-        android:id="@+id/tvEditCardText"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center"
-        android:background="#FFFFFF"
-        android:hint="Edit"
-        android:padding="36dp"
-        android:textColor="#29c99d"
-        />
-    <Button
-        android:id="@+id/btnEditFlipCard"
-        android:layout_width="60dp"
-        android:layout_height="30dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="4dp"
-        android:layout_marginTop="8dp"
-        android:background="#FFFFFF"
-        android:text="flip Card"
-        android:textColor="#29c99d"
-        android:textSize="10sp"/>
-    <LinearLayout
+        android:id="@+id/labelFrontText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvEditCardFrontText"
+        android:layout_alignBottom="@+id/tvEditCardFrontText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#FFFFFF"
+        android:text="Front:"
+        android:textColor="#26c99d"
+        android:textSize="24sp"/>
+
+    <EditText
+        android:id="@+id/tvEditCardFrontText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@+id/labelFrontText"
+        android:background="#FFFFFF"
+        android:hint="Front of card"
+        android:inputType="textMultiLine"
+        android:padding="4dp"
+        android:textColor="#29c99d"/>
+
+    <TextView
+        android:id="@+id/labelBackText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvEditCardBackText"
+        android:layout_alignBottom="@+id/tvEditCardBackText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#FFFFFF"
+        android:text="Back:"
+        android:textColor="#26c99d"
+        android:textSize="24sp"/>
+
+    <EditText
+        android:id="@+id/tvEditCardBackText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvEditCardFrontText"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/tvEditCardFrontText"
+        android:layout_below="@+id/tvEditCardFrontText"
         android:layout_gravity="center"
-        android:layout_marginBottom="8dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="25dp"
+        android:background="#FFFFFF"
+        android:hint="Back of card"
+        android:inputType="textMultiLine"
+        android:padding="4dp"
+        android:textColor="#29c99d"/>
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvEditTags"
+        android:layout_toLeftOf="@+id/tvEditTags"
+        android:layout_toStartOf="@+id/tvEditTags"
+        android:background="#FFFFFF"
+        android:text="Tags:"
+        android:textColor="#26c99d"
+        android:textSize="24sp"/>
+
+    <EditText
+        android:id="@+id/tvEditTags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvEditCardBackText"
+        android:layout_alignStart="@+id/tvEditCardBackText"
+        android:layout_below="@+id/tvEditCardBackText"
+        android:layout_marginTop="25dp"
+        android:background="#FFFFFF"
+        android:hint="comma-separated"
+        android:textColor="#26c99d"
+        android:textSize="20sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/btnDeleteCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Delete"
+            android:textColor="#29c99d"
+            android:textSize="18sp"
+            android:onClick="onDeleteAction"/>
+
         <Button
             android:id="@+id/btnCancelEdit"
-            android:layout_width="60dp"
-            android:layout_height="25dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="8dp"
-            android:background="#FFFFFF"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Cancel"
             android:textColor="#29c99d"
-            android:textSize="10sp"/>
+            android:textSize="18sp"
+            android:onClick="onCancelAction"/>
+
         <Button
             android:id="@+id/btnSaveEdit"
-            android:layout_width="60dp"
-            android:layout_height="25dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="8dp"
-            android:background="#FFFFFF"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Save"
             android:textColor="#29c99d"
-            android:textSize="10sp"/>
+            android:textSize="18sp"
+            android:onClick="onSaveAction"/>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
-        >
-        <Button
-            android:layout_width="50dp"
-            android:layout_height="30dp"
-            android:background="#ffffff"
-            android:text="tags:"
-            android:textColor="#26c99d"
-
-            />
-        <TextView
-            android:id="@+id/tvEditTags"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:background="#ffffff"
-            android:hint="tags                                       "
-            android:textColor="#26c99d"/>
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>
 

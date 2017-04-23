@@ -246,4 +246,7 @@ public class Card {
         return result;
     }
 
+    public void clearTags() {
+        this.tags.clear();
+    }
 }
