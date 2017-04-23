@@ -123,6 +123,23 @@ public class MyCardsDBManagerTest {
     @Test
     public void getAllCards() throws Exception {
 
+        assertEquals("getAllCards() must not be null if there are cards", 0, dbm.getAllCards().length);
+        List<Card> cards = new ArrayList<>();
+        cards.add(new Card(1, "frontside", "backside", new Date(), new Date(), 2.2, 1, 0));
+        cards.add(new Card(2, "", "", new Date(), new Date(), 2.2, 2, 1));
+        cards.add(new Card(3, "f3", "b3", new Date(0), new Date(0), -1, 0, 1));
+        cards.add(new Card(700, "front4", "back4", new Date(), new Date(), 2.2, 1, 0));
+
+        cards.get(1).addTag("mytag1");
+        cards.get(1).addTag("mytag2");
+
+        for(Card card : cards) {
+            card.setId((int) dbm.insertOrUpdateCard(card));
+        }
+
+        assertNotNull("getAllCards() must not be null if there are cards", dbm.getAllCards());
+        assertEquals("getAllCards() must return all the cards in the database", 4, dbm.getAllCards().length);
+
     }
 
     @Test

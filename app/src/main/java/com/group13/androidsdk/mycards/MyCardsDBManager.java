@@ -190,7 +190,7 @@ class MyCardsDBManager extends SQLiteOpenHelper implements NotificationStorage, 
         boolean status = cursor.moveToFirst();
         while (status) {
             cards.add(cardFromCursor(cursor));
-            cursor.moveToNext();
+            status = cursor.moveToNext();
         }
         return cards.toArray(new Card[cards.size()]);
     }
