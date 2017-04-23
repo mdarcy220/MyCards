@@ -187,11 +187,11 @@ class MyCardsDBManager extends SQLiteOpenHelper implements NotificationStorage, 
      */
     private static Card[] cardArrayFromCursor(Cursor cursor) {
         List<Card> cards = new ArrayList<>();
-        cursor.moveToFirst();
-        do {
+        boolean status = cursor.moveToFirst();
+        while (status) {
             cards.add(cardFromCursor(cursor));
-        } while (cursor.moveToNext());
-
+            cursor.moveToNext();
+        }
         return cards.toArray(new Card[cards.size()]);
     }
 
@@ -349,10 +349,11 @@ class MyCardsDBManager extends SQLiteOpenHelper implements NotificationStorage, 
 
     private NotificationRule[] ruleArrayFromCursor(Cursor cursor) {
         List<NotificationRule> rules = new ArrayList<>();
-        cursor.moveToFirst();
-        do {
+        boolean status = cursor.moveToFirst();
+        while (status) {
             rules.add(ruleFromCursor(cursor));
-        } while (cursor.moveToNext());
+            status = cursor.moveToNext();
+        }
 
         return rules.toArray(new NotificationRule[rules.size()]);
     }
