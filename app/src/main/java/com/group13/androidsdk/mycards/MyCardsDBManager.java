@@ -147,6 +147,7 @@ class MyCardsDBManager extends SQLiteOpenHelper implements NotificationStorage, 
             inserted_rowid = db.insert("card", null, cv);
             ContentValues tagValues = new ContentValues();
             tagValues.put("cardId", card.getId());
+            db.delete("tag", "cardId = ?", new String[] {String.valueOf(card.getId())});
             for (String tagName : card.getTags()) {
                 tagValues.put("tagName", tagName);
                 db.insert("tag", null, tagValues);
