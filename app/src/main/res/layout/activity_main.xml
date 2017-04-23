@@ -28,7 +28,7 @@
             android:onClick="onStartReviewBtnClick"/>
 
         <Button
-            android:id="@+id/btnBrowse"
+            android:id="@+id/btnBrowseCards"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -37,7 +37,8 @@
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:text="Browse Cards"
-            android:textColor="#29c99d"/>
+            android:textColor="#29c99d"
+            android:onClick="onBrowseCardsBtnClick"/>
 
         <Button
             android:id="@+id/btnSettings"

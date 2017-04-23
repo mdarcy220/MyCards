@@ -35,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
         }
         Intent intent = new Intent(this, ReviewActivity.class);
         startActivity(intent);
+    }
 
+    public void onBrowseCardsBtnClick(View v) {
+        if(v.getId() != R.id.btnBrowseCards) {
+            return;
+        }
+        Intent intent = new Intent(this, BrowseCardsActivity.class);
+        startActivity(intent);
     }
 }
