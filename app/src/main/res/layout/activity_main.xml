@@ -3,14 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:background="@drawable/bkgrnd_with_border"
-    tools:context="com.group13.androidsdk.mycards.MainActivity">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:orientation="vertical">
+    tools:context="com.group13.androidsdk.mycards.MainActivity"
+    android:orientation="vertical">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -18,9 +12,10 @@
             android:layout_gravity="center"
             android:layout_marginBottom="32dp"
             android:layout_marginTop="128dp"
-            android:src="@drawable/big_logo"/>
+            android:src="@drawable/small_logo"/>
+
         <Button
-            android:id="@+id/btnStReview"
+            android:id="@+id/btnStartReview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -29,7 +24,9 @@
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:text="Start Review"
-            android:textColor="#29c99d"/>
+            android:textColor="#29c99d"
+            android:onClick="onStartReviewBtnClick"/>
+
         <Button
             android:id="@+id/btnBrowse"
             android:layout_width="wrap_content"
@@ -41,6 +38,7 @@
             android:paddingRight="8dp"
             android:text="Browse Cards"
             android:textColor="#29c99d"/>
+
         <Button
             android:id="@+id/btnSettings"
             android:layout_width="wrap_content"
@@ -52,9 +50,5 @@
             android:paddingRight="8dp"
             android:text="Manage Settings"
             android:textColor="#29c99d"/>
-
-    </LinearLayout>
-
-
 
 </LinearLayout>
