@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         if(v.getId() != R.id.btnStartReview) {
             return;
         }
-        Intent intent = new Intent(this, ReviewFrontActivity.class);
+        Intent intent = new Intent(this, ReviewActivity.class);
         startActivity(intent);
 
     }

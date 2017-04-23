@@ -126,7 +126,7 @@ public class ReviewManager {
      * @param score the user's score of the card
      */
     public void finishReview(Card c, int score) {
-        long nextIntervalLength = 0;
+        long nextIntervalLength;
         int interval_num = c.getNumRepetitions() - c.getLastIncorrectRep() + 1;
         if (interval_num == 1) {
             nextIntervalLength = FIRST_INTERVAL_DAYS * DAYS_TO_MILLISECONDS;
@@ -154,6 +154,7 @@ public class ReviewManager {
         if(score < 3) {
             c.setLastIncorrectRep(c.getNumRepetitions());
         }
+        reloadCardList();
     }
 
     /**

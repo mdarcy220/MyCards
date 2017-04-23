@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017 Michael D'Arcy and Brianne O'Niel.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:context="com.group13.androidsdk.mycards.ReviewActivity">
+
+    <TextView
+        android:id="@+id/tvFrontText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#FFFFFF"
+        android:hint=""
+        android:padding="36dp"
+        android:text="Front text"
+        android:textColor="#29c99d"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tvBackText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvFrontText"
+        android:background="#FFFFFF"
+        android:hint=""
+        android:padding="36dp"
+        android:text="Back text"
+        android:textColor="#29c99d"
+        android:textSize="16sp"
+        android:visibility="invisible"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/layoutReviewFrontButtons">
+
+        <Button
+            android:id="@+id/btnSkip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:padding="6dp"
+            android:text="Skip"
+            android:textColor="#29c99d"
+            android:textSize="24sp"/>
+
+        <Button
+            android:id="@+id/btnShowAnswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:onClick="onShowAnswerClick"
+            android:padding="6dp"
+            android:text="Show Answer"
+            android:textColor="#29c99d"
+            android:textSize="24sp"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:visibility="gone"
+        android:id="@+id/layoutScoreButtons">
+
+        <Button
+            android:id="@+id/btnRate1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="6dp"
+            android:text="1"
+            android:textColor="#29c99d"
+            android:textSize="24sp"/>
+
+        <Button
+            android:id="@+id/btnRate2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="6dp"
+            android:text="2"
+            android:textColor="#29c99d"
+            android:textSize="24sp"/>
+
+        <Button
+            android:id="@+id/btnRate3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="6dp"
+            android:text="3"
+            android:textColor="#29c99d"
+            android:textSize="24sp"/>
+
+        <Button
+            android:id="@+id/btnRate4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="6dp"
+            android:text="4"
+            android:textColor="#29c99d"
+            android:textSize="24sp"/>
+
+        <Button
+            android:id="@+id/btnRate5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="6dp"
+            android:text="5"
+            android:textColor="#29c99d"
+            android:textSize="24sp"/>
+    </LinearLayout>
+
+</RelativeLayout>
