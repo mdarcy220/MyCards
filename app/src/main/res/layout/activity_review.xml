@@ -85,6 +85,17 @@
         android:id="@+id/layoutScoreButtons">
 
         <Button
+            android:id="@+id/btnRate0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="6dp"
+            android:text="0"
+            android:textColor="#29c99d"
+            android:textSize="24sp"
+            android:onClick="onScoreCardButtonClick"/>
+
+        <Button
             android:id="@+id/btnRate1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -92,7 +103,8 @@
             android:padding="6dp"
             android:text="1"
             android:textColor="#29c99d"
-            android:textSize="24sp"/>
+            android:textSize="24sp"
+            android:onClick="onScoreCardButtonClick"/>
 
         <Button
             android:id="@+id/btnRate2"
@@ -102,7 +114,8 @@
             android:padding="6dp"
             android:text="2"
             android:textColor="#29c99d"
-            android:textSize="24sp"/>
+            android:textSize="24sp"
+            android:onClick="onScoreCardButtonClick"/>
 
         <Button
             android:id="@+id/btnRate3"
@@ -112,7 +125,8 @@
             android:padding="6dp"
             android:text="3"
             android:textColor="#29c99d"
-            android:textSize="24sp"/>
+            android:textSize="24sp"
+            android:onClick="onScoreCardButtonClick"/>
 
         <Button
             android:id="@+id/btnRate4"
@@ -122,7 +136,8 @@
             android:padding="6dp"
             android:text="4"
             android:textColor="#29c99d"
-            android:textSize="24sp"/>
+            android:textSize="24sp"
+            android:onClick="onScoreCardButtonClick"/>
 
         <Button
             android:id="@+id/btnRate5"
@@ -132,7 +147,8 @@
             android:padding="6dp"
             android:text="5"
             android:textColor="#29c99d"
-            android:textSize="24sp"/>
+            android:textSize="24sp"
+            android:onClick="onScoreCardButtonClick"/>
     </LinearLayout>
 
 </RelativeLayout>

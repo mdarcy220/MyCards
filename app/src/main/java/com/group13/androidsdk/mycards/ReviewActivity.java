@@ -18,12 +18,15 @@ package com.group13.androidsdk.mycards;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class ReviewActivity extends AppCompatActivity {
 
     private ReviewManager reviewManager = null;
+    private Card curCard = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +34,7 @@ public class ReviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_review);
 
         reviewManager = new ReviewManager(MyCardsDBManager.getInstance(this));
-        if(reviewManager.getNumCards() <= 0) {
-            onNoMoreCardsToReview();
-        }
+        loadNextReview();
     }
 
     private void onNoMoreCardsToReview() {
@@ -44,25 +45,74 @@ public class ReviewActivity extends AppCompatActivity {
     }
 
     public void onShowAnswerClick(View v) {
-        if(v.getId() != R.id.btnShowAnswer) {
+        if (v.getId() != R.id.btnShowAnswer) {
             return;
         }
-        if(reviewManager.getNumCards() <= 0) {
+        if (reviewManager.getNumCards() <= 0) {
             onNoMoreCardsToReview();
             return;
         }
-        setShowingCardFront();
+        setShowingCardBack();
     }
 
     private void setShowingCardBack() {
         findViewById(R.id.layoutReviewFrontButtons).setVisibility(View.GONE);
         findViewById(R.id.tvBackText).setVisibility(View.VISIBLE);
         findViewById(R.id.layoutScoreButtons).setVisibility(View.VISIBLE);
+        if (curCard != null) {
+            ((TextView) findViewById(R.id.tvBackText)).setText(curCard.getBackText());
+        }
     }
 
     private void setShowingCardFront() {
         findViewById(R.id.layoutReviewFrontButtons).setVisibility(View.VISIBLE);
         findViewById(R.id.tvBackText).setVisibility(View.GONE);
         findViewById(R.id.layoutScoreButtons).setVisibility(View.GONE);
+        if (curCard != null) {
+            ((TextView) findViewById(R.id.tvFrontText)).setText(curCard.getFrontText());
+        }
+    }
+
+    public void onScoreCardButtonClick(View v) {
+        int score = -1;
+        switch(v.getId()) {
+            case R.id.btnRate0:
+                score = 0;
+                break;
+            case R.id.btnRate1:
+                score = 1;
+                break;
+            case R.id.btnRate2:
+                score = 2;
+                break;
+            case R.id.btnRate3:
+                score = 3;
+                break;
+            case R.id.btnRate4:
+                score = 4;
+                break;
+            case R.id.btnRate5:
+                score = 5;
+                break;
+            default:
+                score = -1;
+        }
+        if(score == -1) {
+            Log.e("score card btn click", "Unknown view clicked");
+            return;
+        }
+
+        reviewManager.finishReview(curCard, score);
+        loadNextReview();
+    }
+
+    private void loadNextReview() {
+        if (reviewManager.getNumCards() <= 0) {
+            curCard = null;
+            onNoMoreCardsToReview();
+        } else {
+            curCard = reviewManager.getNextCard();
+        }
+        setShowingCardFront();
     }
 }

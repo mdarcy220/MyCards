@@ -66,6 +66,7 @@ public class ReviewManager {
      * Gets the next card from the queue.
      */
     public Card getNextCard() {
+        reloadCardList();
         if (!hasNextCard()) {
             return null;
         }
@@ -142,7 +143,9 @@ public class ReviewManager {
         Calendar today = Calendar.getInstance();
         today.setTime(new Date());
         normalizeCalendarDay(today);
+
         long nextRepEpoch = today.getTimeInMillis() + nextIntervalLength;
+
         c.setNextReviewDate(new Date(nextRepEpoch));
         c.setLastReviewDate(new Date());
 
@@ -154,6 +157,7 @@ public class ReviewManager {
         if(score < 3) {
             c.setLastIncorrectRep(c.getNumRepetitions());
         }
+        cardStorage.insertOrUpdateCard(c);
         reloadCardList();
     }
 
