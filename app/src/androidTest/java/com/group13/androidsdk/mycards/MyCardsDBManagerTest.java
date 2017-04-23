@@ -33,36 +33,40 @@ import static org.junit.Assert.*;
  */
 public class MyCardsDBManagerTest {
     private MyCardsDBManager dbm = null;
+    private List<Card> sampleCardList1 = new ArrayList<>();
+
     @Before
     public void setUp() throws Exception {
-        InstrumentationRegistry.getTargetContext().deleteDatabase("mycardsdb2");
-        dbm = MyCardsDBManager.getInstance(InstrumentationRegistry.getTargetContext(), "mycardsdb2");
+        InstrumentationRegistry.getTargetContext().deleteDatabase("mycardsdb");
+        dbm = MyCardsDBManager.getInstance(InstrumentationRegistry.getTargetContext(), "mycardsdb");
 
+        sampleCardList1.clear();
+        sampleCardList1.add(new Card(1, "frontside", "backside", new Date(), new Date(), 2.2, 1, 0));
+        sampleCardList1.add(new Card(2, "", "", new Date(), new Date(), 2.2, 2, 1));
+        sampleCardList1.add(new Card(3, "f3", "b3", new Date(0), new Date(0), -1, 0, 1));
+        sampleCardList1.add(new Card(700, "front4", "back4", new Date(), new Date(), 2.2, 1, 0));
+        sampleCardList1.get(1).addTag("mytag1");
+        sampleCardList1.get(1).addTag("mytag2");
     }
 
     @After
     public void tearDown() throws Exception {
         InstrumentationRegistry.getTargetContext().deleteDatabase("mycardsdb2");
+        sampleCardList1.clear();
     }
 
     @Test
     public void deleteCardById() throws Exception {
-        List<Card> cards = new ArrayList<>();
-        cards.add(new Card(1, "frontside", "backside", new Date(), new Date(), 2.2, 1, 0));
-        cards.add(new Card(2, "", "", new Date(), new Date(), 2.2, 2, 1));
-        cards.add(new Card(3, "f3", "b3", new Date(0), new Date(0), -1, 0, 1));
-        cards.add(new Card(700, "front4", "back4", new Date(), new Date(), 2.2, 1, 0));
-        cards.get(1).addTag("mytag1");
-        cards.get(1).addTag("mytag2");
+        
 
-        for(Card card : cards) {
+        for(Card card : sampleCardList1) {
             card.setId((int) dbm.insertOrUpdateCard(card));
         }
 
 
-        for(Card card : cards) {
+        for(Card card : sampleCardList1) {
             Card card2 = dbm.getCardById(card.getId());
-            assertEquals("Inserted and retreived cards must be equal", card, card2);
+            assertEquals("Inserted and retreived sampleCardList1 must be equal", card, card2);
         }
 
         dbm.deleteCardById(3);
@@ -70,76 +74,52 @@ public class MyCardsDBManagerTest {
         assertNull("deleted card must not be in database", dbm.getCardById(3));
 
 
-        for(Card card : cards) {
+        for(Card card : sampleCardList1) {
             Card card2 = dbm.getCardById(card.getId());
             if(card.getId() != 3) {
-                assertEquals("Inserted and retreived cards must be equal", card, card2);
+                assertEquals("Inserted and retreived sampleCardList1 must be equal", card, card2);
             }
         }
     }
 
     @Test
     public void insertOrUpdateCard() throws Exception {
-        List<Card> cards = new ArrayList<>();
-        cards.add(new Card(1, "frontside", "backside", new Date(), new Date(), 2.2, 1, 0));
-        cards.add(new Card(2, "", "", new Date(), new Date(), 2.2, 2, 1));
-        cards.add(new Card(3, "f3", "b3", new Date(0), new Date(0), -1, 0, 1));
-        cards.add(new Card(700, "front4", "back4", new Date(), new Date(), 2.2, 1, 0));
-        cards.get(1).addTag("mytag1");
-        cards.get(1).addTag("mytag2");
-
-        for(Card card : cards) {
+        for(Card card : sampleCardList1) {
             card.setId((int) dbm.insertOrUpdateCard(card));
         }
-        for(Card card : cards) {
+        for(Card card : sampleCardList1) {
             Card card2 = dbm.getCardById(card.getId());
-            assertEquals("Inserted and retreived cards must be equal", card, card2);
+            assertEquals("Inserted and retreived sampleCardList1 must be equal", card, card2);
         }
 
-        assertEquals("Card must be inserted at proper index", cards.get(3), dbm.getCardById(700));
+        assertEquals("Card must be inserted at proper index", sampleCardList1.get(3), dbm.getCardById(700));
     }
 
     @Test
     public void getCardById() throws Exception {
-        List<Card> cards = new ArrayList<>();
-        cards.add(new Card(1, "frontside", "backside", new Date(), new Date(), 2.2, 1, 0));
-        cards.add(new Card(2, "", "", new Date(), new Date(), 2.2, 2, 1));
-        cards.add(new Card(3, "f3", "b3", new Date(0), new Date(0), -1, 0, 1));
-        cards.add(new Card(700, "front4", "back4", new Date(), new Date(), 2.2, 1, 0));
 
-        cards.get(1).addTag("mytag1");
-        cards.get(1).addTag("mytag2");
-
-        for(Card card : cards) {
+        for(Card card : sampleCardList1) {
             card.setId((int) dbm.insertOrUpdateCard(card));
         }
 
         assertNull("getCardById() must be null if ID does not exist", dbm.getCardById(4));
 
         Card card2 = dbm.getCardById(3);
-        assertEquals("Inserted and retreived cards must be equal", cards.get(2), card2);
+        assertEquals("Inserted and retreived sampleCardList1 must be equal", sampleCardList1.get(2), card2);
     }
 
     @Test
     public void getAllCards() throws Exception {
-
-        assertEquals("getAllCards() must not be null if there are cards", 0, dbm.getAllCards().length);
-        List<Card> cards = new ArrayList<>();
-        cards.add(new Card(1, "frontside", "backside", new Date(), new Date(), 2.2, 1, 0));
-        cards.add(new Card(2, "", "", new Date(), new Date(), 2.2, 2, 1));
-        cards.add(new Card(3, "f3", "b3", new Date(0), new Date(0), -1, 0, 1));
-        cards.add(new Card(700, "front4", "back4", new Date(), new Date(), 2.2, 1, 0));
-
-        cards.get(1).addTag("mytag1");
-        cards.get(1).addTag("mytag2");
-
-        for(Card card : cards) {
+        for(Card card : sampleCardList1) {
             card.setId((int) dbm.insertOrUpdateCard(card));
         }
 
-        assertNotNull("getAllCards() must not be null if there are cards", dbm.getAllCards());
-        assertEquals("getAllCards() must return all the cards in the database", 4, dbm.getAllCards().length);
+        assertNotNull("getAllCards() must not be null if there are sampleCardList1", dbm.getAllCards());
+        assertEquals("getAllCards() must return all the sampleCardList1 in the database", 4, dbm.getAllCards().length);
 
+        InstrumentationRegistry.getTargetContext().deleteDatabase("mycardsdb");
+        dbm = MyCardsDBManager.getInstance(InstrumentationRegistry.getTargetContext(), "mycardsdb");
+        assertEquals("getAllCards() must give an empty array if there are no sampleCardList1", 0, dbm.getAllCards().length);
     }
 
     @Test
@@ -212,7 +192,7 @@ public class MyCardsDBManagerTest {
         assertNull("getCardById() must be null if ID does not exist", dbm.getNotificationRuleById(4));
         NotificationRule rule2 = dbm.getNotificationRuleById(3);
 
-        assertEquals("Inserted and retreived cards must be equal", notificationRules.get(2), rule2);
+        assertEquals("Inserted and retreived sampleCardList1 must be equal", notificationRules.get(2), rule2);
     }
 
     @Test
