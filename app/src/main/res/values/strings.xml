@@ -16,46 +16,4 @@
 
 <resources>
     <string name="app_name">MyCards</string>
-    <string name="create_card_table_sql" translatable="false">
-        CREATE TABLE card (
-            _id INTEGER PRIMARY KEY AUTOINCREMENT,
-            frontText TEXT NOT NULL DEFAULT \'\',
-            backText TEXT NOT NULL DEFAULT \'\',
-            easiness REAL NOT NULL DEFAULT 2.5,
-            nextReviewDate INTEGER,
-            lastReviewDate INTEGER,
-            numRepetitions INTEGER,
-            lastIncorrectRep INTEGER
-        );
-    </string>
-    <string name="create_tag_table_sql" translatable="false">
-        CREATE TABLE tag (
-            cardId INTEGER NOT NULL,
-            tagName TEXT NOT NULL,
-
-            PRIMARY KEY (cardId, tagName),
-
-            FOREIGN KEY (cardId) REFERENCES card(_id)
-                ON UPDATE CASCADE
-                ON DELETE CASCADE
-        );
-    </string>
-    <string name="create_notificationRule_table_sql" translatable="false">
-        CREATE TABLE notificationRule (
-            _id INTEGER PRIMARY KEY AUTOINCREMENT,
-            enabled INTEGER(1) NOT NULL,
-            nextMatchDate INTEGER NOT NULL,
-            datePattern BLOB NOT NULL
-        );
-    </string>
-    <string name="create_keyvalue_table_sql" translatable="false">
-        CREATE TABLE keyValueStore (
-            key TEXT PRIMARY KEY,
-            valueInt INTEGER DEFAULT NULL,
-            valueReal REAL DEFAULT NULL,
-            valueText TEXT DEFAULT NULL,
-            valueBlob BLOB DEFAULT NULL
-        )
-
-    </string>
 </resources>

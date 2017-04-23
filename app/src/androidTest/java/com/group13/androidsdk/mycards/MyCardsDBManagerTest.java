@@ -36,7 +36,7 @@ public class MyCardsDBManagerTest {
     @Before
     public void setUp() throws Exception {
         InstrumentationRegistry.getTargetContext().deleteDatabase("mycardsdb2");
-        dbm = new MyCardsDBManager(InstrumentationRegistry.getTargetContext(), "mycardsdb2", null, 1);
+        dbm = MyCardsDBManager.getInstance(InstrumentationRegistry.getTargetContext(), "mycardsdb2");
 
     }
 

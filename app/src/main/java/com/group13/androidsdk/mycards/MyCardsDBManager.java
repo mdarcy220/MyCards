@@ -32,22 +32,74 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Database manager. This class provides a high-level interface to database operations in the app.
  */
 class MyCardsDBManager extends SQLiteOpenHelper implements NotificationStorage, CardStorage {
 
-    private Context context = null;
     private static final String doNotDisturbKeyName = "notifications.do_not_disturb";
+    private static Map<String, MyCardsDBManager> mInstances = new HashMap<>();
+    
+    private static final String CREATE_CARD_TABLE_SQL = "" +
+            "CREATE TABLE card ( " +
+            "    _id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "    frontText TEXT NOT NULL DEFAULT '', " +
+            "    backText TEXT NOT NULL DEFAULT '', " +
+            "    easiness REAL NOT NULL DEFAULT 2.5, " +
+            "    nextReviewDate INTEGER, " +
+            "    lastReviewDate INTEGER, " +
+            "    numRepetitions INTEGER, " +
+            "    lastIncorrectRep INTEGER " +
+            ");";
 
-    MyCardsDBManager(Context context,
+    private static final String CREATE_TAG_TABLE_SQL = "" +
+            "CREATE TABLE tag (\n" +
+            "    cardId INTEGER NOT NULL,\n" +
+            "    tagName TEXT NOT NULL,\n" +
+            "    PRIMARY KEY (cardId, tagName),\n" +
+            "    FOREIGN KEY (cardId) REFERENCES card(_id)\n" +
+            "        ON UPDATE CASCADE\n" +
+            "        ON DELETE CASCADE\n" +
+            ");";
+
+    private static final String CREATE_NOTIFICATIONRULE_TABLE_SQL = "" +
+            "CREATE TABLE notificationRule (" +
+            "    _id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+            "    enabled INTEGER(1) NOT NULL,\n" +
+            "    nextMatchDate INTEGER NOT NULL,\n" +
+            "    datePattern BLOB NOT NULL\n" +
+            ");";
+
+    private static final String CREATE_KEYVALUE_TABLE_SQL = "" +
+            "CREATE TABLE keyValueStore (\n" +
+            "    key TEXT PRIMARY KEY,\n" +
+            "    valueInt INTEGER DEFAULT NULL,\n" +
+            "    valueReal REAL DEFAULT NULL,\n" +
+            "    valueText TEXT DEFAULT NULL,\n" +
+            "    valueBlob BLOB DEFAULT NULL\n" +
+            ");";
+
+    private MyCardsDBManager(Context context,
                      String name,
                      SQLiteDatabase.CursorFactory factory,
                      int dbVersion) {
         super(context, name, factory, dbVersion);
-        this.context = context;
+    }
+
+    public static synchronized MyCardsDBManager getInstance(Context context) {
+        return getInstance(context, "mycardsdb");
+    }
+
+    public static synchronized MyCardsDBManager getInstance(Context context, String dbname) {
+        if(!mInstances.containsKey(dbname)) {
+            MyCardsDBManager instance = new MyCardsDBManager(context, dbname, null, 1);
+            mInstances.put(dbname, instance);
+        }
+        return mInstances.get(dbname);
     }
 
     @Override
@@ -157,6 +209,7 @@ class MyCardsDBManager extends SQLiteOpenHelper implements NotificationStorage, 
         do {
             card.addTag(c.getString(c.getColumnIndex("tagName")));
         } while (c.moveToNext());
+        c.close();
     }
 
     @Override
@@ -381,14 +434,15 @@ class MyCardsDBManager extends SQLiteOpenHelper implements NotificationStorage, 
         return ret;
     }
 
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         try {
             db.beginTransaction();
-            db.execSQL(context.getString(R.string.create_card_table_sql));
-            db.execSQL(context.getString(R.string.create_tag_table_sql));
-            db.execSQL(context.getString(R.string.create_notificationRule_table_sql));
-            db.execSQL(context.getString(R.string.create_keyvalue_table_sql));
+            db.execSQL(CREATE_CARD_TABLE_SQL);
+            db.execSQL(CREATE_TAG_TABLE_SQL);
+            db.execSQL(CREATE_NOTIFICATIONRULE_TABLE_SQL);
+            db.execSQL(CREATE_KEYVALUE_TABLE_SQL);
 
             ContentValues cv = new ContentValues();
             cv.put("key", doNotDisturbKeyName);
