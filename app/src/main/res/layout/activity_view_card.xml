@@ -20,7 +20,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@drawable/bkgrnd_with_border"
     android:orientation="vertical"
     tools:context="com.group13.androidsdk.mycards.ViewCardActivity">
     <ImageView
@@ -51,8 +50,8 @@
             android:layout_height="25dp"
             android:layout_marginBottom="8dp"
             android:layout_marginRight="4dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/btn_back"/>
+            android:layout_marginTop="8dp"/>
+            <!--android:background="@drawable/btn_back"-->
         <Button
             android:id="@+id/btnViewFlipCard"
             android:layout_width="60dp"
@@ -84,56 +83,54 @@
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="4dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/btn_next"/>
+            android:layout_marginTop="8dp"/>
+        <!--android:background="@drawable/btn_next"-->
 
-    </LinearLayout>
-    <LinearLayout
+</LinearLayout>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginBottom="60dp"
+    android:layout_marginTop="8dp"
+    android:orientation="horizontal">
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="30dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="4dp"/>
+        <!--android:background="@drawable/btn_delete"-->
+    <Button
+        android:id="@+id/btnEdit"
+        android:layout_width="30dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="4dp"/>
+        <!--android:background="@drawable/btn_edit"-->
+</LinearLayout>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="horizontal">
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:background="#ffffff"
+        android:text="tags:"
+        android:textColor="#26c99d"
+
+        />
+    <TextView
+        android:id="@+id/tvTags"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="60dp"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/btnDelete"
-            android:layout_width="30dp"
-
-
-            android:layout_height="25dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginRight="4dp"
-            android:background="@drawable/btn_delete"/>
-        <Button
-            android:id="@+id/btnEdit"
-            android:layout_width="30dp"
-            android:layout_height="25dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="4dp"
-            android:background="@drawable/btn_edit"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
-        <Button
-            android:layout_width="50dp"
-            android:layout_height="30dp"
-            android:background="#ffffff"
-            android:text="tags:"
-            android:textColor="#26c99d"
-
-            />
-        <TextView
-            android:id="@+id/tvTags"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:background="#ffffff"
-            android:hint="tags                                       "
-            android:textColor="#26c99d"/>
-    </LinearLayout>
+        android:layout_marginLeft="8dp"
+        android:background="#ffffff"
+        android:hint="tags                                       "
+        android:textColor="#26c99d"/>
+</LinearLayout>
 
 </LinearLayout>
