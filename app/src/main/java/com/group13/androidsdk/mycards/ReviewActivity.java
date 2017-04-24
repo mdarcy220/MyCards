@@ -20,7 +20,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 public class ReviewActivity extends AppCompatActivity {
@@ -75,7 +74,7 @@ public class ReviewActivity extends AppCompatActivity {
 
     public void onScoreCardButtonClick(View v) {
         int score = -1;
-        switch(v.getId()) {
+        switch (v.getId()) {
             case R.id.btnRate0:
                 score = 0;
                 break;
@@ -97,7 +96,7 @@ public class ReviewActivity extends AppCompatActivity {
             default:
                 score = -1;
         }
-        if(score == -1) {
+        if (score == -1) {
             Log.e("score card btn click", "Unknown view clicked");
             return;
         }
@@ -112,7 +111,7 @@ public class ReviewActivity extends AppCompatActivity {
             onNoMoreCardsToReview();
         } else {
             curCard = reviewManager.getNextCard();
+            setShowingCardFront();
         }
-        setShowingCardFront();
     }
 }
