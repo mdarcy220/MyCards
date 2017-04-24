@@ -22,6 +22,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.ByteArrayInputStream;
@@ -233,6 +234,25 @@ class MyCardsDBManager extends SQLiteOpenHelper implements NotificationStorage, 
     public Card[] getAllCards() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM card;", null);
+        Card[] ret = cardArrayFromCursor(c);
+        for (Card card : ret) {
+            addCardTagsFromDb(card, db);
+        }
+        // Cleanup
+        c.close();
+        db.close();
+
+        return ret;
+    }
+
+    public Card[] getCardsByTags(String[] tags) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<String> paramList = new ArrayList<>(tags.length);
+        for(String tag : tags) {
+            paramList.add("?");
+        }
+        String paramStr = "(" + TextUtils.join(",", paramList) + ")";
+        Cursor c = db.rawQuery("SELECT * FROM card WHERE EXISTS (SELECT 1 FROM tag WHERE cardId = card._id AND tagName IN " + paramStr + ");", tags);
         Card[] ret = cardArrayFromCursor(c);
         for (Card card : ret) {
             addCardTagsFromDb(card, db);

@@ -33,15 +33,17 @@
             android:textSize="24sp"
             android:padding="4dp"/>
         <EditText
+            android:id="@+id/editFilterTags"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnFilterByTag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Filter"/>
+            android:text="Filter"
+            android:onClick="onFilterByTagButtonClick"/>
     </LinearLayout>
 
     <ListView

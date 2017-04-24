@@ -29,6 +29,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -38,6 +39,8 @@ import java.util.List;
 
 public class BrowseCardsActivity extends AppCompatActivity {
 
+    List<String> filterTags = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +48,16 @@ public class BrowseCardsActivity extends AppCompatActivity {
     }
 
     private void initListView() {
-        final Card[] cards = MyCardsDBManager.getInstance(this).getAllCards();
-        CardArrayAdapter cardAdapter = new CardArrayAdapter(this, R.layout.browse_cards_listitem, cards);
-        ListView listView = ((ListView)findViewById(R.id.listViewCards));
+        String[] filterTagsArr = new String[0];
+        filterTagsArr = filterTags.toArray(filterTagsArr);
+        final Card[] cards = 0 < filterTagsArr.length ? MyCardsDBManager.getInstance(this)
+                .getCardsByTags(
+                filterTagsArr) : MyCardsDBManager.getInstance(this).getAllCards();
+        CardArrayAdapter cardAdapter = new CardArrayAdapter(this,
+                R.layout.browse_cards_listitem,
+                cards
+        );
+        ListView listView = ((ListView) findViewById(R.id.listViewCards));
         listView.setAdapter(cardAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -59,6 +69,20 @@ public class BrowseCardsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void onFilterByTagButtonClick(View v) {
+        EditText editFilterTags = (EditText) findViewById(R.id.editFilterTags);
+        String tagStr = editFilterTags.getText().toString();
+        String[] tagStrs = tagStr.split(",");
+        filterTags.clear();
+        for (String tag : tagStrs) {
+            tag = tag.trim();
+            if (!tag.equals("")) {
+                filterTags.add(tag);
+            }
+        }
+        initListView();
     }
 
     @Override
@@ -116,7 +140,7 @@ class CardArrayAdapter extends ArrayAdapter<Card> {
     @Override
     public View getView(int index, View convertView, @NonNull ViewGroup parent) {
         View itemView = convertView;
-        if(itemView == null) {
+        if (itemView == null) {
             LayoutInflater inflater = context.getLayoutInflater();
             itemView = inflater.inflate(R.layout.browse_cards_listitem, parent, false);
             CardViewHolder holder = new CardViewHolder();
@@ -126,7 +150,7 @@ class CardArrayAdapter extends ArrayAdapter<Card> {
         }
 
         Card c = this.values[index];
-        CardViewHolder holder = (CardViewHolder)itemView.getTag();
+        CardViewHolder holder = (CardViewHolder) itemView.getTag();
         holder.backTextView.setText(c.getBackText());
         holder.frontTextView.setText(c.getFrontText());
 

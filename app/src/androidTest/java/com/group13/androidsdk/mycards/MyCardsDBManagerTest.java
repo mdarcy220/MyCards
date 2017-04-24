@@ -47,6 +47,7 @@ public class MyCardsDBManagerTest {
         sampleCardList1.add(new Card(700, "front4", "back4", new Date(), new Date(), 2.2, 1, 0));
         sampleCardList1.get(1).addTag("mytag1");
         sampleCardList1.get(1).addTag("mytag2");
+        sampleCardList1.get(3).addTag("mytag1");
     }
 
     @After
@@ -57,27 +58,23 @@ public class MyCardsDBManagerTest {
 
     @Test
     public void deleteCardById() throws Exception {
-        
-
         for(Card card : sampleCardList1) {
             card.setId((int) dbm.insertOrUpdateCard(card));
         }
 
-
         for(Card card : sampleCardList1) {
             Card card2 = dbm.getCardById(card.getId());
-            assertEquals("Inserted and retreived sampleCardList1 must be equal", card, card2);
+            assertEquals("Inserted and retreived cards must be equal", card, card2);
         }
 
         dbm.deleteCardById(3);
 
         assertNull("deleted card must not be in database", dbm.getCardById(3));
 
-
         for(Card card : sampleCardList1) {
             Card card2 = dbm.getCardById(card.getId());
             if(card.getId() != 3) {
-                assertEquals("Inserted and retreived sampleCardList1 must be equal", card, card2);
+                assertEquals("Inserted and retreived cards must be equal", card, card2);
             }
         }
     }
@@ -89,7 +86,7 @@ public class MyCardsDBManagerTest {
         }
         for(Card card : sampleCardList1) {
             Card card2 = dbm.getCardById(card.getId());
-            assertEquals("Inserted and retreived sampleCardList1 must be equal", card, card2);
+            assertEquals("Inserted and retreived cards must be equal", card, card2);
         }
 
         assertEquals("Card must be inserted at proper index", sampleCardList1.get(3), dbm.getCardById(700));
@@ -97,7 +94,6 @@ public class MyCardsDBManagerTest {
 
     @Test
     public void getCardById() throws Exception {
-
         for(Card card : sampleCardList1) {
             card.setId((int) dbm.insertOrUpdateCard(card));
         }
@@ -105,7 +101,7 @@ public class MyCardsDBManagerTest {
         assertNull("getCardById() must be null if ID does not exist", dbm.getCardById(4));
 
         Card card2 = dbm.getCardById(3);
-        assertEquals("Inserted and retreived sampleCardList1 must be equal", sampleCardList1.get(2), card2);
+        assertEquals("Inserted and retreived cards must be equal", sampleCardList1.get(2), card2);
     }
 
     @Test
@@ -114,12 +110,24 @@ public class MyCardsDBManagerTest {
             card.setId((int) dbm.insertOrUpdateCard(card));
         }
 
-        assertNotNull("getAllCards() must not be null if there are sampleCardList1", dbm.getAllCards());
-        assertEquals("getAllCards() must return all the sampleCardList1 in the database", 4, dbm.getAllCards().length);
+        assertNotNull("getAllCards() must not be null if there are cards", dbm.getAllCards());
+        assertEquals("getAllCards() must return all the cards in the database", 4, dbm.getAllCards().length);
 
         InstrumentationRegistry.getTargetContext().deleteDatabase("mycardsdb");
         dbm = MyCardsDBManager.getInstance(InstrumentationRegistry.getTargetContext(), "mycardsdb");
-        assertEquals("getAllCards() must give an empty array if there are no sampleCardList1", 0, dbm.getAllCards().length);
+        assertEquals("getAllCards() must give an empty array if there are no cards", 0, dbm.getAllCards().length);
+    }
+
+    @Test
+    public void getCardsByTags() throws Exception {
+        for(Card card : sampleCardList1) {
+            card.setId((int) dbm.insertOrUpdateCard(card));
+        }
+
+        assertNotNull("getCardsByTags() must not be null if there are cards", dbm.getCardsByTags(new String[] {"nonexistentTag"}));
+        assertEquals("getCardsByTags() must give an empty array if there are no cards", 0, dbm.getCardsByTags(new String[] {"nonexistentTag"}).length);
+        assertEquals("getCardsByTags() must return all the cards that have matching tags", 2, dbm.getCardsByTags(new String[] {"mytag1"}).length);
+        assertEquals("getCardsByTags() must return all the cards that have matching tags", 2, dbm.getCardsByTags(new String[] {"mytag1", "mytag2"}).length);
     }
 
     @Test

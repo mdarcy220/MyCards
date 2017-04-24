@@ -69,7 +69,7 @@ public class EditCardActivity extends AppCompatActivity {
         String[] tagStrs = tagStr.split(",");
         c.clearTags();
         for(String tag : tagStrs) {
-            tag.trim();
+            tag = tag.trim();
             if(!tag.equals("")) {
                 c.addTag(tag);
             }
