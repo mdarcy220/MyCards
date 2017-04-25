@@ -40,6 +40,7 @@
                 android:value="com.group13.androidsdk.mycards.MainActivity" />
         </activity>
         <activity android:name=".EditCardActivity"/>
+        <activity android:name=".EditNotificationRuleActivity"/>
         <activity android:name=".CardStatsActivity"/>
         <activity android:name=".ReviewActivity">
             <meta-data

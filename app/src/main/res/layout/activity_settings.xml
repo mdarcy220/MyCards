@@ -15,83 +15,57 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:orientation="vertical"
-    tools:context="com.group13.androidsdk.mycards.SettingsActivity">
-    <ImageView
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.group13.androidsdk.mycards.SettingsActivity">
+
+    <Switch
+        android:id="@+id/switchDoNotDisturb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="32dp"
-        android:layout_marginTop="64dp"
-        android:src="@drawable/small_logo"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="8dp"
-        android:background="#FFFFFF"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:padding="10dp"
+        android:switchMinWidth="50dp"
         android:text="Do Not Disturb"
-        android:textColor="#29c99d"/>
-    <RadioGroup
+        android:textSize="20sp"
+        android:onClick="onDoNotDisturbClick"/>
+
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="8dp"
-        android:orientation="horizontal">
-        <RadioButton
-            android:id="@+id/rbYesDisturb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
-            android:text="On"
-            android:textColor="#ffffff"/>
-        <RadioButton
-            android:id="@+id/rbNoDisturb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Off"
-            android:textColor="#ffffff"/>
-    </RadioGroup>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="8dp"
-        android:background="#FFFFFF"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:text="Notification settings"
-        android:textColor="#29c99d"
-        />
-    <Button
-        android:id="@+id/btnViewRules"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="8dp"
-        android:background="#FFFFFF"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:text="View rules"
-        android:textColor="#29c99d"
-        />
-    <Button
-        android:id="@+id/btnNewRule"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="#FFFFFF"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:text="New rule"
-        android:textColor="#29c99d"
+        android:layout_alignBottom="@+id/button3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/switchDoNotDisturb"
+        android:layout_centerVertical="true"
+        android:padding="10dp"
+        android:text="Notification Rules"
+        android:textSize="20sp"
         />
 
-</LinearLayout>
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/switchDoNotDisturb"
+        android:text="Add Rule"
+        android:onClick="onAddRuleClick"
+        />
+
+    <ListView
+        android:id="@+id/listViewRules"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        />
+
+</RelativeLayout>

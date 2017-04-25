@@ -25,6 +25,8 @@ import java.util.Date;
  */
 class SimpleDatePattern implements DatePattern {
 
+    private static final long serialVersionUID = 421290834701L;
+
     private Date start;
     private Date end;
     private long repeatInterval = -1;
@@ -127,4 +129,19 @@ class SimpleDatePattern implements DatePattern {
         return new Date(this.start.getTime() + repeatInterval * neededRepeats);
     }
 
+    public Date getEndDate() {
+        return end;
+    }
+
+    public Date getStartDate() {
+        return start;
+    }
+
+    public long getRepeatInterval() {
+        return repeatInterval;
+    }
+
+    public int getNumRepeats() {
+        return numRepeats;
+    }
 }

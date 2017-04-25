@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017 Michael D'Arcy and Brianne O'Niel.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rel_layout_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editStartDate"
+            android:layout_alignBottom="@+id/editStartDate"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Start date"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/editStartDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:ems="10"
+            android:inputType="date"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_layout_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/rel_layout_1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editStartTime"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Start time"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/editStartTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:ems="10"
+            android:inputType="time"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_layout_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/rel_layout_2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editEndDate"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="End date"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/editEndDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:ems="10"
+            android:inputType="date"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_layout_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/rel_layout_3">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editEndTime"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="End time"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/editEndTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:ems="10"
+            android:inputType="time"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_layout_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rel_layout_4">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editRepeatInterval"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Repeat every"
+            android:textSize="20sp"
+            android:id="@+id/textView6"/>
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editRepeatInterval"
+            android:layout_alignBottom="@+id/editRepeatInterval"
+            android:layout_toEndOf="@+id/editRepeatInterval"
+            android:layout_toRightOf="@+id/editRepeatInterval"
+            android:text="days"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/editRepeatInterval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="3"
+            android:inputType="number"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/textView6"
+            android:layout_toEndOf="@+id/textView6"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_layout_6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rel_layout_5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editRepeatTimes"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Repeat a total of"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editRepeatTimes"
+            android:layout_alignBottom="@+id/editRepeatTimes"
+            android:layout_toEndOf="@+id/editRepeatTimes"
+            android:layout_toRightOf="@+id/editRepeatTimes"
+            android:text="times"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/editRepeatTimes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/textView7"
+            android:layout_toRightOf="@+id/textView7"
+            android:ems="3"
+            android:inputType="number"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/btnDeleteCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Delete"
+            android:textColor="#29c99d"
+            android:textSize="18sp"
+            android:onClick="onDeleteAction"/>
+
+        <Button
+            android:id="@+id/btnCancelEdit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:textColor="#29c99d"
+            android:textSize="18sp"
+            android:onClick="onCancelAction"/>
+
+        <Button
+            android:id="@+id/btnSaveEdit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Save"
+            android:textColor="#29c99d"
+            android:textSize="18sp"
+            android:onClick="onSaveAction"/>
+    </LinearLayout>
+</RelativeLayout>
