@@ -9,6 +9,7 @@
 /.idea/dictionaries/
 /.idea/inspectionProfiles/
 /.idea/modules.xml
+/.idea/gradle.xml
 
 .DS_Store
 /build/
