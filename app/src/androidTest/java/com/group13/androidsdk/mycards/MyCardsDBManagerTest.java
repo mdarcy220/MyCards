@@ -34,35 +34,61 @@ import static org.junit.Assert.*;
 public class MyCardsDBManagerTest {
     private MyCardsDBManager dbm = null;
     private List<Card> sampleCardList1 = new ArrayList<>();
+    List<NotificationRule> notificationRules = new ArrayList<>();
+
+    private static final String dbName = "mycardsdb2";
 
     @Before
     public void setUp() throws Exception {
-        InstrumentationRegistry.getTargetContext().deleteDatabase("mycardsdb");
-        dbm = MyCardsDBManager.getInstance(InstrumentationRegistry.getTargetContext(), "mycardsdb");
+        InstrumentationRegistry.getTargetContext().deleteDatabase(dbName);
+        dbm = MyCardsDBManager.getInstance(InstrumentationRegistry.getTargetContext(), dbName);
 
         sampleCardList1.clear();
-        sampleCardList1.add(new Card(1, "frontside", "backside", new Date(), new Date(), 2.2, 1, 0));
+        sampleCardList1.add(new Card(1,
+                "frontside",
+                "backside",
+                new Date(),
+                new Date(),
+                2.2,
+                1,
+                0
+        ));
         sampleCardList1.add(new Card(2, "", "", new Date(), new Date(), 2.2, 2, 1));
         sampleCardList1.add(new Card(3, "f3", "b3", new Date(0), new Date(0), -1, 0, 1));
         sampleCardList1.add(new Card(700, "front4", "back4", new Date(), new Date(), 2.2, 1, 0));
         sampleCardList1.get(1).addTag("mytag1");
         sampleCardList1.get(1).addTag("mytag2");
         sampleCardList1.get(3).addTag("mytag1");
+
+        notificationRules.add(new NotificationRule(1,
+                new SimpleDatePattern(new Date(), new Date(), 0, 0)
+        ));
+        notificationRules.add(new NotificationRule(2,
+                new SimpleDatePattern(new Date(10000), new Date(15000), 0, 0)
+        ));
+        notificationRules.add(new NotificationRule(3,
+                new SimpleDatePattern(new Date(10000), new Date(15000), 10000, 5)
+        ));
+        notificationRules.add(new NotificationRule(700,
+                new SimpleDatePattern(new Date(10000), new Date(), 0, 0)
+        ));
+
     }
 
     @After
     public void tearDown() throws Exception {
-        InstrumentationRegistry.getTargetContext().deleteDatabase("mycardsdb2");
+        InstrumentationRegistry.getTargetContext().deleteDatabase(dbName);
         sampleCardList1.clear();
+        notificationRules.clear();
     }
 
     @Test
     public void deleteCardById() throws Exception {
-        for(Card card : sampleCardList1) {
-            card.setId((int) dbm.insertOrUpdateCard(card));
+        for (Card card : sampleCardList1) {
+            card.setId((int) dbm.upsertCard(card));
         }
 
-        for(Card card : sampleCardList1) {
+        for (Card card : sampleCardList1) {
             Card card2 = dbm.getCardById(card.getId());
             assertEquals("Inserted and retreived cards must be equal", card, card2);
         }
@@ -71,31 +97,34 @@ public class MyCardsDBManagerTest {
 
         assertNull("deleted card must not be in database", dbm.getCardById(3));
 
-        for(Card card : sampleCardList1) {
+        for (Card card : sampleCardList1) {
             Card card2 = dbm.getCardById(card.getId());
-            if(card.getId() != 3) {
+            if (card.getId() != 3) {
                 assertEquals("Inserted and retreived cards must be equal", card, card2);
             }
         }
     }
 
     @Test
-    public void insertOrUpdateCard() throws Exception {
-        for(Card card : sampleCardList1) {
-            card.setId((int) dbm.insertOrUpdateCard(card));
+    public void upsertCard() throws Exception {
+        for (Card card : sampleCardList1) {
+            card.setId((int) dbm.upsertCard(card));
         }
-        for(Card card : sampleCardList1) {
+        for (Card card : sampleCardList1) {
             Card card2 = dbm.getCardById(card.getId());
             assertEquals("Inserted and retreived cards must be equal", card, card2);
         }
 
-        assertEquals("Card must be inserted at proper index", sampleCardList1.get(3), dbm.getCardById(700));
+        assertEquals("Card must be inserted at proper index",
+                sampleCardList1.get(3),
+                dbm.getCardById(700)
+        );
     }
 
     @Test
     public void getCardById() throws Exception {
-        for(Card card : sampleCardList1) {
-            card.setId((int) dbm.insertOrUpdateCard(card));
+        for (Card card : sampleCardList1) {
+            card.setId((int) dbm.upsertCard(card));
         }
 
         assertNull("getCardById() must be null if ID does not exist", dbm.getCardById(4));
@@ -106,28 +135,45 @@ public class MyCardsDBManagerTest {
 
     @Test
     public void getAllCards() throws Exception {
-        for(Card card : sampleCardList1) {
-            card.setId((int) dbm.insertOrUpdateCard(card));
+        for (Card card : sampleCardList1) {
+            card.setId((int) dbm.upsertCard(card));
         }
 
         assertNotNull("getAllCards() must not be null if there are cards", dbm.getAllCards());
-        assertEquals("getAllCards() must return all the cards in the database", 4, dbm.getAllCards().length);
+        assertEquals("getAllCards() must return all the cards in the database",
+                4,
+                dbm.getAllCards().length
+        );
 
-        InstrumentationRegistry.getTargetContext().deleteDatabase("mycardsdb");
-        dbm = MyCardsDBManager.getInstance(InstrumentationRegistry.getTargetContext(), "mycardsdb");
-        assertEquals("getAllCards() must give an empty array if there are no cards", 0, dbm.getAllCards().length);
+        InstrumentationRegistry.getTargetContext().deleteDatabase(dbName);
+        dbm = MyCardsDBManager.getInstance(InstrumentationRegistry.getTargetContext(), dbName);
+        assertEquals("getAllCards() must give an empty array if there are no cards",
+                0,
+                dbm.getAllCards().length
+        );
     }
 
     @Test
     public void getCardsByTags() throws Exception {
-        for(Card card : sampleCardList1) {
-            card.setId((int) dbm.insertOrUpdateCard(card));
+        for (Card card : sampleCardList1) {
+            card.setId((int) dbm.upsertCard(card));
         }
 
-        assertNotNull("getCardsByTags() must not be null if there are cards", dbm.getCardsByTags(new String[] {"nonexistentTag"}));
-        assertEquals("getCardsByTags() must give an empty array if there are no cards", 0, dbm.getCardsByTags(new String[] {"nonexistentTag"}).length);
-        assertEquals("getCardsByTags() must return all the cards that have matching tags", 2, dbm.getCardsByTags(new String[] {"mytag1"}).length);
-        assertEquals("getCardsByTags() must return all the cards that have matching tags", 2, dbm.getCardsByTags(new String[] {"mytag1", "mytag2"}).length);
+        assertNotNull("getCardsByTags() must not be null if there are cards",
+                dbm.getCardsByTags(new String[]{"nonexistentTag"})
+        );
+        assertEquals("getCardsByTags() must give an empty array if there are no cards",
+                0,
+                dbm.getCardsByTags(new String[]{"nonexistentTag"}).length
+        );
+        assertEquals("getCardsByTags() must return all the cards that have matching tags",
+                2,
+                dbm.getCardsByTags(new String[]{"mytag1"}).length
+        );
+        assertEquals("getCardsByTags() must return all the cards that have matching tags",
+                2,
+                dbm.getCardsByTags(new String[]{"mytag1", "mytag2"}).length
+        );
     }
 
     @Test
@@ -137,28 +183,29 @@ public class MyCardsDBManagerTest {
 
     @Test
     public void deleteNotificationRuleById() throws Exception {
-        List<NotificationRule> notificationRules = new ArrayList<>();
-        notificationRules.add(new NotificationRule(1, new SimpleDatePattern(new Date(), new Date(), 0, 0)));
-        notificationRules.add(new NotificationRule(2, new SimpleDatePattern(new Date(10000), new Date(15000), 0, 0)));
-        notificationRules.add(new NotificationRule(3, new SimpleDatePattern(new Date(10000), new Date(15000), 10000, 5)));
-        notificationRules.add(new NotificationRule(700, new SimpleDatePattern(new Date(10000), new Date(), 0, 0)));
-
-        for(NotificationRule notificationRule : notificationRules) {
-            notificationRule.setId((int) dbm.insertOrUpdateNotificationRule(notificationRule));
+        for (NotificationRule notificationRule : notificationRules) {
+            notificationRule.setId((int) dbm.upsertNotificationRule(notificationRule));
         }
 
-        for(NotificationRule notificationRule : notificationRules) {
-            NotificationRule notificationRule2 = dbm.getNotificationRuleById(notificationRule.getId());
-            assertEquals("Inserted and retreived notificationRules must be equal", notificationRule, notificationRule2);
+        for (NotificationRule notificationRule : notificationRules) {
+            NotificationRule notificationRule2 = dbm.getNotificationRuleById(notificationRule
+                    .getId());
+            assertEquals("Inserted and retreived notificationRules must be equal",
+                    notificationRule,
+                    notificationRule2
+            );
         }
 
         dbm.deleteNotificationRuleById(3);
 
-        assertNull("getCardById() must be null if ID does not exist", dbm.getNotificationRuleById(3));
+        assertNull("getCardById() must be null if ID does not exist",
+                dbm.getNotificationRuleById(3)
+        );
 
-        for(NotificationRule notificationRule : notificationRules) {
-            NotificationRule notificationRule2 = dbm.getNotificationRuleById(notificationRule.getId());
-            if(notificationRule.getId() != 3) {
+        for (NotificationRule notificationRule : notificationRules) {
+            NotificationRule notificationRule2 = dbm.getNotificationRuleById(notificationRule
+                    .getId());
+            if (notificationRule.getId() != 3) {
                 assertEquals("Inserted and retreived notificationRules must be equal",
                         notificationRule,
                         notificationRule2
@@ -168,44 +215,61 @@ public class MyCardsDBManagerTest {
     }
 
     @Test
-    public void insertOrUpdateNotificationRule() throws Exception {
-        List<NotificationRule> notificationRules = new ArrayList<>();
-        notificationRules.add(new NotificationRule(-1, new SimpleDatePattern(new Date(), new Date(), 0, 0)));
-        notificationRules.add(new NotificationRule(-1, new SimpleDatePattern(new Date(10000), new Date(15000), 0, 0)));
-        notificationRules.add(new NotificationRule(-1, new SimpleDatePattern(new Date(10000), new Date(15000), 10000, 5)));
-        notificationRules.add(new NotificationRule(700, new SimpleDatePattern(new Date(10000), new Date(), 0, 0)));
-
-        for(NotificationRule notificationRule : notificationRules) {
-            notificationRule.setId((int) dbm.insertOrUpdateNotificationRule(notificationRule));
+    public void upsertNotificationRule() throws Exception {
+        for (NotificationRule notificationRule : notificationRules) {
+            notificationRule.setId((int) dbm.upsertNotificationRule(notificationRule));
         }
-        for(NotificationRule notificationRule : notificationRules) {
-            NotificationRule notificationRule2 = dbm.getNotificationRuleById(notificationRule.getId());
-            assertEquals("Inserted and retreived notificationRules must be equal", notificationRule, notificationRule2);
+        for (NotificationRule notificationRule : notificationRules) {
+            NotificationRule notificationRule2 = dbm.getNotificationRuleById(notificationRule
+                    .getId());
+            assertEquals("Inserted and retreived notificationRules must be equal",
+                    notificationRule,
+                    notificationRule2
+            );
         }
 
-        assertEquals("NotificationRule must be inserted at proper index", notificationRules.get(3), dbm.getNotificationRuleById(700));
+        assertEquals("NotificationRule must be inserted at proper index",
+                notificationRules.get(3),
+                dbm.getNotificationRuleById(700)
+        );
     }
 
     @Test
     public void getNotificationRuleById() throws Exception {
-        List<NotificationRule> notificationRules = new ArrayList<>();
-        notificationRules.add(new NotificationRule(1, new SimpleDatePattern(new Date(), new Date(), 0, 0)));
-        notificationRules.add(new NotificationRule(2, new SimpleDatePattern(new Date(10000), new Date(15000), 0, 0)));
-        notificationRules.add(new NotificationRule(3, new SimpleDatePattern(new Date(10000), new Date(15000), 10000, 5)));
-        notificationRules.add(new NotificationRule(700, new SimpleDatePattern(new Date(10000), new Date(), 0, 0)));
-
-        for(NotificationRule notificationRule : notificationRules) {
-            notificationRule.setId((int) dbm.insertOrUpdateNotificationRule(notificationRule));
+        for (NotificationRule notificationRule : notificationRules) {
+            notificationRule.setId((int) dbm.upsertNotificationRule(notificationRule));
         }
-        assertNull("getCardById() must be null if ID does not exist", dbm.getNotificationRuleById(4));
+        assertNull("getNotificationRuleById() must be null if ID does not exist",
+                dbm.getNotificationRuleById(4)
+        );
         NotificationRule rule2 = dbm.getNotificationRuleById(3);
 
-        assertEquals("Inserted and retreived sampleCardList1 must be equal", notificationRules.get(2), rule2);
+        assertEquals("Inserted and retreived rules must be equal", notificationRules.get(2), rule2);
+        assertEquals("Date must be the same",
+                notificationRules.get(2).getDatePattern().getStartDate().getTime(),
+                rule2.getDatePattern().getStartDate().getTime()
+        );
     }
 
     @Test
     public void getAllNotificationRules() throws Exception {
+        for (NotificationRule notificationRule : notificationRules) {
+            notificationRule.setId((int) dbm.upsertNotificationRule(notificationRule));
+        }
+        assertNotNull("getAllNotificationRules() must not be null if there are rules",
+                dbm.getAllNotificationRules()
+        );
+        assertEquals("getAllCNotificationRules() must return all the rules in the database",
+                4,
+                dbm.getAllNotificationRules().length
+        );
 
+        InstrumentationRegistry.getTargetContext().deleteDatabase(dbName);
+        dbm = MyCardsDBManager.getInstance(InstrumentationRegistry.getTargetContext(), dbName);
+        assertEquals("getAllNotificationRules() must give an empty array if there are no rules",
+                0,
+                dbm.getAllNotificationRules().length
+        );
     }
 
     @Test

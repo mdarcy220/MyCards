@@ -137,7 +137,7 @@ class MyCardsDBManager extends SQLiteOpenHelper implements NotificationStorage, 
     }
 
     @Override
-    public long insertOrUpdateCard(Card card) {
+    public long upsertCard(Card card) {
         ContentValues cv = cardToContentValues(card);
         String[] whereArgs = {String.valueOf(card.getId())};
         SQLiteDatabase db = this.getWritableDatabase();
@@ -155,7 +155,7 @@ class MyCardsDBManager extends SQLiteOpenHelper implements NotificationStorage, 
             }
             db.setTransactionSuccessful();
         } catch (SQLiteException e) {
-            Log.e("DBManager", "insertOrUpdateCard(card): " + e.getLocalizedMessage());
+            Log.e("DBManager", "upsertCard(card): " + e.getLocalizedMessage());
         } finally {
             db.endTransaction();
             db.close();
@@ -337,7 +337,7 @@ class MyCardsDBManager extends SQLiteOpenHelper implements NotificationStorage, 
     }
 
     @Override
-    public long insertOrUpdateNotificationRule(NotificationRule rule) {
+    public long upsertNotificationRule(NotificationRule rule) {
         ContentValues cv = ruleToContentValues(rule);
         String[] whereArgs = {String.valueOf(rule.getId())};
         SQLiteDatabase db = this.getWritableDatabase();
@@ -348,7 +348,7 @@ class MyCardsDBManager extends SQLiteOpenHelper implements NotificationStorage, 
             inserted_rowid = db.insert("notificationRule", null, cv);
             db.setTransactionSuccessful();
         } catch (SQLiteException e) {
-            Log.e("DBManager", "insertOrUpdateNotificationRule(rule): " + e.getLocalizedMessage());
+            Log.e("DBManager", "upsertNotificationRule(rule): " + e.getLocalizedMessage());
         } finally {
             db.endTransaction();
             db.close();

@@ -157,7 +157,7 @@ public class ReviewManager {
         if(score < 3) {
             c.setLastIncorrectRep(c.getNumRepetitions());
         }
-        cardStorage.insertOrUpdateCard(c);
+        cardStorage.upsertCard(c);
         reloadCardList();
     }
 

@@ -34,7 +34,7 @@ interface CardStorage {
      * new card is inserted into the storage. If the given card has ID -1, a new ID for the card
      * will be returned.
      */
-    long insertOrUpdateCard(Card card);
+    long upsertCard(Card card);
 
     /**
      * @return the card with the given ID from the storage (<code>null</code> if no such card

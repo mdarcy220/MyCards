@@ -37,7 +37,7 @@ interface NotificationStorage {
      * @return The new ID of the rule in the storage (same as given if updating, new ID if
      * inserting)
      */
-    long insertOrUpdateNotificationRule(NotificationRule rule);
+    long upsertNotificationRule(NotificationRule rule);
 
     /**
      * Gets the stored notification rule with ID matching <code>ruleID</code>. If no such rule

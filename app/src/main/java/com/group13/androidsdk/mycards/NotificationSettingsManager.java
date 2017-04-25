@@ -43,7 +43,7 @@ public class NotificationSettingsManager {
 
     public void addRule(NotificationRule nr) {
         this.rules.add(nr);
-        ns.insertOrUpdateNotificationRule(nr);
+        ns.upsertNotificationRule(nr);
     }
 
     /**

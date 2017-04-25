@@ -20,9 +20,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
-
-import java.util.Date;
 
 public class EditCardActivity extends AppCompatActivity {
 
@@ -92,7 +89,7 @@ public class EditCardActivity extends AppCompatActivity {
     public void onSaveAction(View v) {
         if(this.card != null) {
             saveLayoutToCard(this.card);
-            MyCardsDBManager.getInstance(this).insertOrUpdateCard(this.card);
+            MyCardsDBManager.getInstance(this).upsertCard(this.card);
         }
         this.finish();
     }
