@@ -11,7 +11,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="32dp"
-            android:layout_marginTop="128dp"
+            android:layout_marginTop="100dp"
             android:src="@drawable/small_logo"/>
 
         <Button
@@ -50,6 +50,7 @@
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:text="Manage Settings"
-            android:textColor="#29c99d"/>
+            android:textColor="#29c99d"
+            android:onClick="onSettingsBtnClick"/>
 
 </LinearLayout>

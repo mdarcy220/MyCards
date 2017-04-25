@@ -30,18 +30,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onStartReviewBtnClick(View v) {
-        if(v.getId() != R.id.btnStartReview) {
-            return;
-        }
         Intent intent = new Intent(this, ReviewActivity.class);
         startActivity(intent);
     }
 
     public void onBrowseCardsBtnClick(View v) {
-        if(v.getId() != R.id.btnBrowseCards) {
-            return;
-        }
         Intent intent = new Intent(this, BrowseCardsActivity.class);
+        startActivity(intent);
+    }
+
+    public void onSettingsBtnClick(View v) {
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 }
