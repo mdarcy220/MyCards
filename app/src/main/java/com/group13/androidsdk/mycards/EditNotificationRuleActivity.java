@@ -16,7 +16,9 @@
 
 package com.group13.androidsdk.mycards;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -123,7 +125,7 @@ public class EditNotificationRuleActivity extends AppCompatActivity {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        return String.format(Locale.US, "%04d-%02d-%02d", year, month+1, day);
+        return String.format(Locale.US, "%04d-%02d-%02d", year, month + 1, day);
     }
 
     private String formatCalendarTime(Calendar calendar) {
@@ -145,7 +147,8 @@ public class EditNotificationRuleActivity extends AppCompatActivity {
         parseCalendarDate(endDate, editEndDate.getText().toString());
         parseCalendarTime(endDate, editEndTime.getText().toString());
 
-        long repeatInterval = Integer.parseInt(editRepeatInterval.getText().toString())*1000*60*60*24;
+        long repeatInterval = Integer.parseInt(editRepeatInterval.getText().toString()) * 1000 *
+                60 * 60 * 24;
         int numRepeats = Integer.parseInt(editRepeatTimes.getText().toString());
 
         SimpleDatePattern datePattern = new SimpleDatePattern(startDate.getTime(),
@@ -187,10 +190,25 @@ public class EditNotificationRuleActivity extends AppCompatActivity {
 
 
     public void onDeleteAction(View v) {
-        if (this.rule != null) {
-            MyCardsDBManager.getInstance(this).deleteNotificationRuleById(this.rule.getId());
-        }
-        this.finish();
+
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Deleting Rule")
+                .setMessage("Are you sure you want to delete this rule? This cannot be undone.")
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (EditNotificationRuleActivity.this.rule != null) {
+                            MyCardsDBManager.getInstance(EditNotificationRuleActivity.this)
+                                    .deleteNotificationRuleById(
+                                    EditNotificationRuleActivity.this.rule.getId());
+                        }
+                        EditNotificationRuleActivity.this.finish();
+                    }
+
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
     }
 
     public void onSaveAction(View v) {

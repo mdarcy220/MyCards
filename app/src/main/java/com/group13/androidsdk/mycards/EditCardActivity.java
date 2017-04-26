@@ -16,7 +16,9 @@
 
 package com.group13.androidsdk.mycards;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -32,14 +34,14 @@ public class EditCardActivity extends AppCompatActivity {
 
         int cardId = this.getIntent().getExtras().getInt("cardId");
         card = MyCardsDBManager.getInstance(this).getCardById(cardId);
-        if(card == null) {
+        if (card == null) {
             card = new Card("", "");
         }
         loadCardToLayout(card);
     }
 
     private void loadCardToLayout(Card c) {
-        if(c == null) {
+        if (c == null) {
             return;
         }
         ((EditText) findViewById(R.id.tvEditCardFrontText)).setText(c.getFrontText());
@@ -65,9 +67,9 @@ public class EditCardActivity extends AppCompatActivity {
         String tagStr = ((EditText) findViewById(R.id.tvEditTags)).getText().toString();
         String[] tagStrs = tagStr.split(",");
         c.clearTags();
-        for(String tag : tagStrs) {
+        for (String tag : tagStrs) {
             tag = tag.trim();
-            if(!tag.equals("")) {
+            if (!tag.equals("")) {
                 c.addTag(tag);
             }
         }
@@ -80,14 +82,28 @@ public class EditCardActivity extends AppCompatActivity {
 
 
     public void onDeleteAction(View v) {
-        if(this.card != null) {
-            MyCardsDBManager.getInstance(this).deleteCardById(this.card.getId());
-        }
-        this.finish();
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Deleting Card")
+                .setMessage("Are you sure you want to delete this card? This cannot be undone.")
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        if (EditCardActivity.this.card != null) {
+                            MyCardsDBManager.getInstance(EditCardActivity.this).deleteCardById(
+                                    EditCardActivity.this.card.getId());
+                        }
+                        EditCardActivity.this.finish();
+                    }
+
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
     }
 
     public void onSaveAction(View v) {
-        if(this.card != null) {
+        if (this.card != null) {
             saveLayoutToCard(this.card);
             MyCardsDBManager.getInstance(this).upsertCard(this.card);
         }
