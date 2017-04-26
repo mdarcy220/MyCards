@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent serviceIntent = new Intent(this, NotificationService.class);
+        this.startService(serviceIntent);
     }
 
     public void onStartReviewBtnClick(View v) {
