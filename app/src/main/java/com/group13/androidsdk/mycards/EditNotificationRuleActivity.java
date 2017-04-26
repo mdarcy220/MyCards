@@ -17,9 +17,7 @@
 package com.group13.androidsdk.mycards;
 
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
 
@@ -125,7 +123,7 @@ public class EditNotificationRuleActivity extends AppCompatActivity {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        return String.format(Locale.US, "%04d-%02d-%02d", year, month, day);
+        return String.format(Locale.US, "%04d-%02d-%02d", year, month+1, day);
     }
 
     private String formatCalendarTime(Calendar calendar) {
