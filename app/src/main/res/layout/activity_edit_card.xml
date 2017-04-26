@@ -103,8 +103,131 @@
         android:layout_marginTop="25dp"
         android:background="#FFFFFF"
         android:hint="comma-separated"
+        android:inputType="text"
         android:textColor="#26c99d"
         android:textSize="20sp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvEditTags"
+        android:layout_marginTop="15dp"
+        android:id="@+id/cardStatsContainer">
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:text="Card Stats:"
+            android:textColor="#26c99d"
+            android:textSize="24sp"/>
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView10"
+            android:background="#FFFFFF"
+            android:text="Last review:"
+            android:textColor="#26c99d"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/tvLastReviewDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView5"
+            android:layout_alignBottom="@+id/textView5"
+            android:layout_marginLeft="5dp"
+            android:layout_toEndOf="@+id/textView5"
+            android:layout_toRightOf="@+id/textView5"
+            android:background="#FFFFFF"
+            android:text=""
+            android:textColor="#26c99d"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/tvNextReviewLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView5"
+            android:background="#FFFFFF"
+            android:text="Next review:"
+            android:textColor="#26c99d"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/tvNextReviewDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tvNextReviewLabel"
+            android:layout_alignBottom="@+id/tvNextReviewLabel"
+            android:layout_marginLeft="5dp"
+            android:layout_toEndOf="@+id/tvNextReviewLabel"
+            android:layout_toRightOf="@+id/tvNextReviewLabel"
+            android:background="#FFFFFF"
+            android:text=""
+            android:textColor="#26c99d"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/tvTotalReviewsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tvNextReviewLabel"
+            android:background="#FFFFFF"
+            android:text="Total reviews:"
+            android:textColor="#26c99d"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/tvTotalReviews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tvTotalReviewsLabel"
+            android:layout_alignBottom="@+id/tvTotalReviewsLabel"
+            android:layout_marginLeft="5dp"
+            android:layout_toEndOf="@+id/tvTotalReviewsLabel"
+            android:layout_toRightOf="@+id/tvTotalReviewsLabel"
+            android:background="#FFFFFF"
+            android:text=""
+            android:textColor="#26c99d"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/tvEasinessLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tvTotalReviewsLabel"
+            android:background="#FFFFFF"
+            android:text="Easiness:"
+            android:textColor="#26c99d"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/tvEasiness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tvEasinessLabel"
+            android:layout_alignBottom="@+id/tvEasinessLabel"
+            android:layout_marginLeft="5dp"
+            android:layout_toEndOf="@+id/tvEasinessLabel"
+            android:layout_toRightOf="@+id/tvEasinessLabel"
+            android:background="#FFFFFF"
+            android:text=""
+            android:textColor="#26c99d"
+            android:textSize="14sp"/>
+    </RelativeLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -116,30 +239,33 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="onDeleteAction"
             android:text="Delete"
             android:textColor="#29c99d"
             android:textSize="18sp"
-            android:onClick="onDeleteAction"/>
+            android:focusable="false"/>
 
         <Button
             android:id="@+id/btnCancelEdit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="onCancelAction"
             android:text="Cancel"
             android:textColor="#29c99d"
             android:textSize="18sp"
-            android:onClick="onCancelAction"/>
+            android:focusable="false"/>
 
         <Button
             android:id="@+id/btnSaveEdit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="onSaveAction"
             android:text="Save"
             android:textColor="#29c99d"
             android:textSize="18sp"
-            android:onClick="onSaveAction"/>
+            android:focusable="false"/>
     </LinearLayout>
 </RelativeLayout>
 

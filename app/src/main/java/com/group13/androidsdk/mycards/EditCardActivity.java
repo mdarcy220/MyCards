@@ -22,6 +22,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class EditCardActivity extends AppCompatActivity {
 
@@ -36,9 +42,22 @@ public class EditCardActivity extends AppCompatActivity {
         card = MyCardsDBManager.getInstance(this).getCardById(cardId);
         if (card == null) {
             card = new Card("", "");
+            findViewById(R.id.cardStatsContainer).setVisibility(View.GONE);
         }
         loadCardToLayout(card);
     }
+
+
+    private String formatDateAsString(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(date.getTime());
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        return String.format(Locale.US, "%04d-%02d-%02d", year, month + 1, day);
+    }
+
 
     private void loadCardToLayout(Card c) {
         if (c == null) {
@@ -55,6 +74,16 @@ public class EditCardActivity extends AppCompatActivity {
             tagStr = tagStr.substring(0, tagStr.length() - 2);
         }
         ((EditText) findViewById(R.id.tvEditTags)).setText(tagStr);
+
+        // Load card statistics
+        ((TextView) findViewById(R.id.tvLastReviewDate)).setText(formatDateAsString(c
+                .getLastReviewDate()));
+        ((TextView) findViewById(R.id.tvNextReviewDate)).setText(formatDateAsString(c
+                .getNextReviewDate()));
+        ((TextView) findViewById(R.id.tvTotalReviews)).setText(String.valueOf(c
+                .getNumRepetitions()));
+        ((TextView) findViewById(R.id.tvEasiness)).setText(String.valueOf(c.getEasiness()));
+
     }
 
     private void saveLayoutToCard(Card c) {
@@ -69,10 +98,22 @@ public class EditCardActivity extends AppCompatActivity {
         c.clearTags();
         for (String tag : tagStrs) {
             tag = tag.trim();
-            if (!tag.equals("")) {
+            if (!tag.equals("") && !isStringInArray(c.getTags(), tag)) {
                 c.addTag(tag);
             }
         }
+    }
+
+    private boolean isStringInArray(String[] arr, String str) {
+        if(arr == null || arr.length == 0) {
+            return false;
+        }
+        for(String s : arr) {
+            if(str.equals(s)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
