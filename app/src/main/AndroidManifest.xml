@@ -36,11 +36,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.group13.androidsdk.mycards.MainActivity" />
         </activity>
-        <activity android:name=".NotificationRulesActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.group13.androidsdk.mycards.SettingsActivity" />
-        </activity>
         <activity android:name=".BrowseCardsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
