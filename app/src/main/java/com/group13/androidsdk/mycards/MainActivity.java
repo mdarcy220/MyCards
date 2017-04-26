@@ -20,8 +20,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private List<String> filterTags = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +38,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onStartReviewBtnClick(View v) {
+        EditText editFilterTags = (EditText) findViewById(R.id.editFilterTags);
+        String tagStr = editFilterTags.getText().toString();
+        String[] tagStrs = tagStr.split(",");
+        filterTags.clear();
+        for (String tag : tagStrs) {
+            tag = tag.trim();
+            if (!tag.equals("")) {
+                filterTags.add(tag);
+            }
+        }
         Intent intent = new Intent(this, ReviewActivity.class);
+        intent.putExtra("filterTags", filterTags.toArray(new String[filterTags.size()]));
         startActivity(intent);
     }
 

@@ -33,12 +33,12 @@ public class ReviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_review);
 
         reviewManager = new ReviewManager(MyCardsDBManager.getInstance(this));
+        reviewManager.setFilterTags(getIntent().getStringArrayExtra("filterTags"));
         loadNextReview();
     }
 
     private void onNoMoreCardsToReview() {
         setShowingCardFront();
-
         ((TextView) findViewById(R.id.tvFrontText)).setText("No more cards to review");
         findViewById(R.id.layoutReviewFrontButtons).setVisibility(View.GONE);
     }

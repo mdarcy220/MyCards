@@ -178,7 +178,25 @@ public class MyCardsDBManagerTest {
 
     @Test
     public void getCardsForReviewBefore() throws Exception {
+        for (Card card : sampleCardList1) {
+            card.setId((int) dbm.upsertCard(card));
+        }
 
+        assertNotNull("getCardsForReviewBefore() must not be null if there are cards",
+                dbm.getCardsForReviewBefore(new Date(), new String[]{"nonexistentTag"})
+        );
+        assertEquals("getCardsForReviewBefore() must give an empty array if there are no cards",
+                0,
+                dbm.getCardsForReviewBefore(new Date(), new String[]{"nonexistentTag"}).length
+        );
+        assertEquals("getCardsForReviewBefore() must return all the cards that have matching tags",
+                2,
+                dbm.getCardsForReviewBefore(new Date(), new String[]{"mytag1"}).length
+        );
+        assertEquals("getCardsForReviewBefore() must return all the cards that have matching tags",
+                2,
+                dbm.getCardsForReviewBefore(new Date(), new String[]{"mytag1", "mytag2"}).length
+        );
     }
 
     @Test

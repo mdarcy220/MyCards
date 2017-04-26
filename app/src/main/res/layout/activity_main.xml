@@ -11,8 +11,24 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="32dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="50dp"
             android:src="@drawable/small_logo"/>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tags to review (blank for all tags):"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            />
+
+        <EditText
+            android:id="@+id/editFilterTags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="tag1, tag2, ..."
+            android:inputType="textPersonName"/>
 
         <Button
             android:id="@+id/btnStartReview"

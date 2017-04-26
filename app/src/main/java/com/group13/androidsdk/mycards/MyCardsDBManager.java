@@ -32,6 +32,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +45,7 @@ class MyCardsDBManager extends SQLiteOpenHelper implements NotificationStorage, 
 
     private static final String doNotDisturbKeyName = "notifications.do_not_disturb";
     private static Map<String, MyCardsDBManager> mInstances = new HashMap<>();
-    
+
     private static final String CREATE_CARD_TABLE_SQL = "" +
             "CREATE TABLE card ( " +
             "    _id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -147,7 +148,7 @@ class MyCardsDBManager extends SQLiteOpenHelper implements NotificationStorage, 
             db.delete("card", "_id = ?", whereArgs);
             inserted_rowid = db.insert("card", null, cv);
             ContentValues tagValues = new ContentValues();
-            tagValues.put("cardId", card.getId());
+            tagValues.put("cardId", inserted_rowid);
             db.delete("tag", "cardId = ?", new String[] {String.valueOf(card.getId())});
             for (String tagName : card.getTags()) {
                 tagValues.put("tagName", tagName);
@@ -265,10 +266,31 @@ class MyCardsDBManager extends SQLiteOpenHelper implements NotificationStorage, 
     }
 
     @Override
-    public Card[] getCardsForReviewBefore(Date d) {
+    public Card[] getCardsForReviewBefore(Date d, String[] filterTags) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String[] args = {String.valueOf(d.getTime())};
-        Cursor c = db.rawQuery("SELECT * FROM card WHERE nextReviewDate < ?;", args);
+        if (filterTags == null) {
+            filterTags = new String[0];
+        }
+        List<String> paramList = new ArrayList<>(filterTags.length);
+        for(String tag : filterTags) {
+            paramList.add("?");
+        }
+        String paramStr = "(" + TextUtils.join(",", paramList) + ")";
+
+        String queryStr = "SELECT * FROM card WHERE nextReviewDate < ? ";
+        if(0 < filterTags.length) {
+            queryStr += " AND EXISTS (SELECT 1 FROM tag WHERE cardId = card._id AND tagName IN " +
+                    paramStr + ")";
+        }
+        queryStr += ";";
+
+        List<String> paramValuesList = new ArrayList<>(filterTags.length + 1);
+        paramValuesList.add(String.valueOf(d.getTime()));
+        Collections.addAll(paramValuesList, filterTags);
+        Cursor c = db.rawQuery(
+                queryStr,
+                paramValuesList.toArray(new String[paramValuesList.size()])
+        );
         Card[] ret = cardArrayFromCursor(c);
         for (Card card : ret) {
             addCardTagsFromDb(card, db);

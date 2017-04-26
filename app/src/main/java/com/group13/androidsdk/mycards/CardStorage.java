@@ -48,8 +48,14 @@ interface CardStorage {
     Card[] getAllCards();
 
     /**
-     * @return an array of cards scheduled to be reviewed before the given <code>Date</code>
-     * (empty array if no cards)
+     * @return an array of all cards having at least one of the given tags
      */
-    Card[] getCardsForReviewBefore(Date d);
+    Card[] getCardsByTags(String[] tags);
+
+    /**
+     * @return an array of cards scheduled to be reviewed before the given <code>Date</code>
+     * (empty array if no cards). If at least one value is given in filterTags, the results will
+     * be filtered by filterTags.
+     */
+    Card[] getCardsForReviewBefore(Date d, String[] filterTags);
 }

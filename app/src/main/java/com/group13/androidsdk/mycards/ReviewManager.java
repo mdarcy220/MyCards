@@ -46,6 +46,7 @@ public class ReviewManager {
     private List<Card> cardsForReview = new ArrayList<>();
     private CardStorage cardStorage = null;
     private int curCardIndex = 0;
+    private String[] filterTags = new String[0];
 
     public ReviewManager(CardStorage cardStorage) {
         this.cardStorage = cardStorage;
@@ -57,7 +58,7 @@ public class ReviewManager {
      */
     private void reloadCardList() {
         cardsForReview.clear();
-        Card[] cards = cardStorage.getCardsForReviewBefore(new Date());
+        Card[] cards = cardStorage.getCardsForReviewBefore(new Date(), this.filterTags);
         Collections.addAll(cardsForReview, cards);
         curCardIndex = 0;
     }
@@ -166,5 +167,14 @@ public class ReviewManager {
      */
     public int getNumCards() {
         return this.cardsForReview.size();
+    }
+
+    public void setFilterTags(String[] filterTags) {
+        this.filterTags = filterTags;
+        reloadCardList();
+    }
+
+    public String[] getFilterTags() {
+        return filterTags.clone();
     }
 }

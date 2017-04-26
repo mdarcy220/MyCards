@@ -168,7 +168,7 @@ public class NotificationService extends IntentService {
         if (!(Math.abs(lastNotifMillis - SystemClock.elapsedRealtime()) < FIFTEEN_MINUTES ||
                 dbm.getDoNotDisturb() ||
                 dateMatchesAnyRule(new Date(), rules) ||
-                dbm.getCardsForReviewBefore(new Date()).length == 0)) {
+                dbm.getCardsForReviewBefore(new Date(), null).length == 0)) {
             lastNotifMillis = SystemClock.elapsedRealtime();
             prefEditor.putLong("lastNotifElapsedRealtime", lastNotifMillis);
 
