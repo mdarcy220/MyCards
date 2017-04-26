@@ -25,6 +25,7 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.SystemClock;
@@ -50,16 +51,14 @@ public class NotificationService extends IntentService {
             Instances.EVENT_ID,      // 0
             Instances.BEGIN,         // 1
             Instances.END,           // 2
-            Instances.TITLE          // 3
+            Instances.CALENDAR_DISPLAY_NAME          // 3
     };
 
     // The indices for the projection array above.
     private static final int PROJECTION_BEGIN_INDEX = 1;
     private static final int PROJECTION_END_INDEX = 2;
 
-    private long lastNotifMillis = 0;
-
-    private List<NotificationRule> ruleList = new ArrayList<>();
+    private static final String PREF_NAME = "NotificationService";
 
     public NotificationService() {
         super("MyCardsNotificationService");
@@ -72,7 +71,6 @@ public class NotificationService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        this.lastNotifMillis = intent.getLongExtra("lastRunElapsedRealtime", 0);
         rescheduleNotifications();
     }
 
@@ -116,7 +114,7 @@ public class NotificationService extends IntentService {
         Cursor cur;
         ContentResolver cr = getContentResolver();
 
-        String selection = "";//Instances.CALENDAR_ID + " = 1";
+        String selection = Instances.CALENDAR_ID + " = 1";
         String[] selectionArgs = new String[]{};
 
         Uri.Builder builder = CalendarContract.Instances.CONTENT_URI.buildUpon();
@@ -150,7 +148,6 @@ public class NotificationService extends IntentService {
                     0
             );
             rules.add(new NotificationRule(-1, datePattern, true));
-            System.out.println(cur.getString(3));
         }
         cur.close();
         return rules;
@@ -163,16 +160,22 @@ public class NotificationService extends IntentService {
         Collections.addAll(rules, MyCardsDBManager.getInstance(this).getAllNotificationRules());
         rules.addAll(getCalendarAsNotificationRules());
 
+        SharedPreferences prefs = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        long lastNotifMillis = prefs.getLong("lastNotifElapsedRealtime", -2 * FIFTEEN_MINUTES);
+        SharedPreferences.Editor prefEditor = prefs.edit();
+
         MyCardsDBManager dbm = MyCardsDBManager.getInstance(this);
-        if (!(Math.abs(this.lastNotifMillis - SystemClock.elapsedRealtime()) < FIFTEEN_MINUTES ||
+        if (!(Math.abs(lastNotifMillis - SystemClock.elapsedRealtime()) < FIFTEEN_MINUTES ||
                 dbm.getDoNotDisturb() ||
                 dateMatchesAnyRule(new Date(), rules) ||
                 dbm.getCardsForReviewBefore(new Date()).length == 0)) {
+            lastNotifMillis = SystemClock.elapsedRealtime();
+            prefEditor.putLong("lastNotifElapsedRealtime", lastNotifMillis);
+
             sendNotification();
         }
 
         Intent intent = new Intent(this, NotificationService.class);
-        intent.putExtra("lastRunElapsedRealtime", SystemClock.elapsedRealtime());
         PendingIntent pi = PendingIntent.getService(this,
                 0,
                 intent,
@@ -184,11 +187,16 @@ public class NotificationService extends IntentService {
                 SystemClock.elapsedRealtime() + FIFTEEN_MINUTES,
                 pi
         );
+
+        prefEditor.putLong("lastRunElapsedRealtime", SystemClock.elapsedRealtime());
+        prefEditor.apply();
     }
 
     private boolean dateMatchesAnyRule(Date d, List<NotificationRule> ruleList) {
         for (NotificationRule rule : ruleList) {
-            if (rule.getDatePattern().dateMatches(d)) {
+            if (rule.isEnabled() && rule.getDatePattern().dateMatches(d)) {
+                System.out.println(rule.getDatePattern().getStartDate().toString());
+                System.out.println(rule.getDatePattern().getEndDate().toString());
                 return true;
             }
         }
