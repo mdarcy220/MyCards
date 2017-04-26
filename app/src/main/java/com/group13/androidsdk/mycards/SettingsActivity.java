@@ -30,6 +30,7 @@ import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -91,6 +92,17 @@ class NotificationRuleArrayAdapter extends ArrayAdapter<NotificationRule> {
 
     private NotificationRule[] values;
     private AppCompatActivity context;
+
+    private static final SimpleDateFormat formatCalendarDate = new SimpleDateFormat("yyyy-MM-DD",
+            Locale.US
+    );
+    private static final SimpleDateFormat formatCalendarTime = new SimpleDateFormat("HH:mm",
+            Locale.US
+    );
+    private static final SimpleDateFormat formatCalendarDateTime = new SimpleDateFormat(
+            "yyyy-MM-dd HH:mm",
+            Locale.US
+    );
 
     private static class NotificationRuleViewHolder {
         TextView dateRangeLabel;
@@ -156,23 +168,7 @@ class NotificationRuleArrayAdapter extends ArrayAdapter<NotificationRule> {
             );
         }
 
-        return formatCalendarDate(startDate) + " " + formatCalendarTime(startDate) + " to " +
-                formatCalendarDate(
-                        endDate) + " " + formatCalendarTime(endDate) + repeatStr;
-    }
-
-    private String formatCalendarDate(Calendar calendar) {
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-        return String.format(Locale.US, "%04d-%02d-%02d", year, month, day);
-    }
-
-    private String formatCalendarTime(Calendar calendar) {
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int minute = calendar.get(Calendar.MINUTE);
-
-        return String.format(Locale.US, "%02d:%02d", hour, minute);
+        return formatCalendarDateTime.format(startDate.getTime()) + " to " + formatCalendarDateTime.format(
+                endDate.getTime()) + repeatStr;
     }
 }
