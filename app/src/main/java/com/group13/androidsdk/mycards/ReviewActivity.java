@@ -114,4 +114,8 @@ public class ReviewActivity extends AppCompatActivity {
             setShowingCardFront();
         }
     }
+
+    public void onSkipClick(View v) {
+        loadNextReview();
+    }
 }

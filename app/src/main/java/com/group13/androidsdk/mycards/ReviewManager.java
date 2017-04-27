@@ -28,7 +28,7 @@ import java.util.List;
  * instance of this class to use it, so:
  * <br>
  * <pre>
- *      ReviewManager rm = new ReviewManager();
+ *      ReviewManager rm = new ReviewManager(MyCardsDBManager.getinstance(context));
  *      while (0 < rm.getNumCards && !userHasQuit) {
  *           Card c = rm.getNextCard();
  *          // When user is done, put the 1-5 rating into a "score" variable
@@ -60,16 +60,21 @@ public class ReviewManager {
         cardsForReview.clear();
         Card[] cards = cardStorage.getCardsForReviewBefore(new Date(), this.filterTags);
         Collections.addAll(cardsForReview, cards);
-        curCardIndex = 0;
+        if (curCardIndex >= cardsForReview.size()) {
+            curCardIndex = 0;
+        }
     }
 
     /**
      * Gets the next card from the queue.
      */
     public Card getNextCard() {
-        reloadCardList();
         if (!hasNextCard()) {
-            return null;
+            reloadCardList();
+            curCardIndex = 0;
+            if (!hasNextCard()) {
+                return null;
+            }
         }
 
         return cardsForReview.get(curCardIndex++);
@@ -150,12 +155,12 @@ public class ReviewManager {
         c.setNextReviewDate(new Date(nextRepEpoch));
         c.setLastReviewDate(new Date());
 
-        double newEasiness = c.getEasiness() + (0.1 - (5-score)*(0.08+(5-score)*0.02));
+        double newEasiness = c.getEasiness() + (0.1 - (5 - score) * (0.08 + (5 - score) * 0.02));
         c.setEasiness(Math.max(newEasiness, 1.3));
 
-        c.setNumRepetitions(c.getNumRepetitions()+1);
+        c.setNumRepetitions(c.getNumRepetitions() + 1);
 
-        if(score < 3) {
+        if (score < 3) {
             c.setLastIncorrectRep(c.getNumRepetitions());
         }
         cardStorage.upsertCard(c);

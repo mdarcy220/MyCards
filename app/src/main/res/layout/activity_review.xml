@@ -62,7 +62,8 @@
             android:padding="6dp"
             android:text="Skip"
             android:textColor="#29c99d"
-            android:textSize="24sp"/>
+            android:textSize="24sp"
+            android:onClick="onSkipClick"/>
 
         <Button
             android:id="@+id/btnShowAnswer"
