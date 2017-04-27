@@ -60,6 +60,8 @@ public class NotificationService extends IntentService {
 
     private static final String PREF_NAME = "NotificationService";
 
+    private static final long FIFTEEN_MINUTES = 15 * 60 * 1000;
+
     public NotificationService() {
         super("MyCardsNotificationService");
     }
@@ -154,7 +156,6 @@ public class NotificationService extends IntentService {
     }
 
     private void rescheduleNotifications() {
-        final long FIFTEEN_MINUTES = 15 * 60 * 60 * 1000;
 
         List<NotificationRule> rules = new ArrayList<>();
         Collections.addAll(rules, MyCardsDBManager.getInstance(this).getAllNotificationRules());
