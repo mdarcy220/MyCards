@@ -54,7 +54,7 @@ import java.util.List;
  */
 public class NotificationService extends IntentService {
 
-    public static final String[] INSTANCE_PROJECTION = new String[]{
+    private static final String[] INSTANCE_PROJECTION = new String[]{
             Instances.EVENT_ID,      // 0
             Instances.BEGIN,         // 1
             Instances.END,           // 2

@@ -40,7 +40,7 @@
     <string name="repeat_a_total_of">Repeat a total of</string>
     <string name="times">times</string>
     <string name="tags_to_review_blank_for_all_tags">Tags to review (blank for all tags):</string>
-    <string name="tag1_tag2">tag1, tag2, ...</string>
+    <string name="tag1_tag2">tag1, tag2, …</string>
     <string name="start_review">Start Review</string>
     <string name="browse_cards">Browse Cards</string>
     <string name="manage_settings">Manage Settings</string>
@@ -59,4 +59,5 @@
     <string name="add_rule">Add Rule</string>
     <string name="add">Add</string>
     <string name="logo">Logo</string>
+    <string name="no_more_cards_to_review">No more cards to review</string>
 </resources>

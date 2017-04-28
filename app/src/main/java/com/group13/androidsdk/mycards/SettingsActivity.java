@@ -100,12 +100,6 @@ class NotificationRuleArrayAdapter extends ArrayAdapter<NotificationRule> {
     private NotificationRule[] values;
     private AppCompatActivity context;
 
-    private static final SimpleDateFormat formatCalendarDate = new SimpleDateFormat("yyyy-MM-DD",
-            Locale.US
-    );
-    private static final SimpleDateFormat formatCalendarTime = new SimpleDateFormat("HH:mm",
-            Locale.US
-    );
     private static final SimpleDateFormat formatCalendarDateTime = new SimpleDateFormat(
             "yyyy-MM-dd HH:mm",
             Locale.US

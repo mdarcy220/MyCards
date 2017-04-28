@@ -28,6 +28,7 @@ import android.app.Dialog;
 import java.util.Calendar;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.app.DatePickerDialog;
 import android.widget.DatePicker;
@@ -42,7 +43,7 @@ import java.util.Locale;
 public class DatePickerFragment extends AppCompatDialogFragment implements DatePickerDialog
         .OnDateSetListener {
 
-    EditText editview = null;
+    private EditText editview = null;
 
     public DatePickerFragment() {
         super();
@@ -52,6 +53,7 @@ public class DatePickerFragment extends AppCompatDialogFragment implements DateP
         this.editview = e;
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current date as the default date in the picker

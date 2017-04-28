@@ -45,7 +45,7 @@ import java.util.List;
 
 public class BrowseCardsActivity extends AppCompatActivity {
 
-    List<String> filterTags = new ArrayList<>();
+    private List<String> filterTags = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

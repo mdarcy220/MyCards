@@ -46,7 +46,7 @@ public class ReviewActivity extends AppCompatActivity {
 
     private void onNoMoreCardsToReview() {
         setShowingCardFront();
-        ((TextView) findViewById(R.id.tvFrontText)).setText("No more cards to review");
+        ((TextView) findViewById(R.id.tvFrontText)).setText(R.string.no_more_cards_to_review);
         findViewById(R.id.layoutReviewFrontButtons).setVisibility(View.GONE);
     }
 
@@ -80,7 +80,7 @@ public class ReviewActivity extends AppCompatActivity {
     }
 
     public void onScoreCardButtonClick(View v) {
-        int score = -1;
+        int score;
         switch (v.getId()) {
             case R.id.btnRate0:
                 score = 0;

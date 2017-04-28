@@ -39,7 +39,7 @@ import java.util.Locale;
 
 public class EditNotificationRuleActivity extends AppCompatActivity {
 
-    NotificationRule rule = null;
+    private NotificationRule rule = null;
     private EditText editStartDate;
     private EditText editEndDate;
     private EditText editStartTime;

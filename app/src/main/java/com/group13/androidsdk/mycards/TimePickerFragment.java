@@ -26,6 +26,7 @@ package com.group13.androidsdk.mycards;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.widget.EditText;
 import android.widget.TimePicker;
@@ -40,7 +41,7 @@ import java.util.Locale;
 public class TimePickerFragment extends AppCompatDialogFragment implements TimePickerDialog
         .OnTimeSetListener {
 
-    EditText editview = null;
+    private EditText editview = null;
 
     public TimePickerFragment() {
         super();
@@ -50,6 +51,7 @@ public class TimePickerFragment extends AppCompatDialogFragment implements TimeP
         this.editview = e;
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current date as the default date in the picker

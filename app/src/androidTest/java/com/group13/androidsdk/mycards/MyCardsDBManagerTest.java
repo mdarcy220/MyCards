@@ -34,7 +34,7 @@ import static org.junit.Assert.*;
 public class MyCardsDBManagerTest {
     private MyCardsDBManager dbm = null;
     private List<Card> sampleCardList1 = new ArrayList<>();
-    List<NotificationRule> notificationRules = new ArrayList<>();
+    private List<NotificationRule> notificationRules = new ArrayList<>();
 
     private static final String dbName = "mycardsdb2";
 
