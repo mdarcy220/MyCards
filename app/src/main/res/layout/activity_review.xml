@@ -31,7 +31,7 @@
         android:background="#FFFFFF"
         android:hint=""
         android:padding="36dp"
-        android:text="Front text"
+        android:text="@string/front_text"
         android:textColor="#29c99d"
         android:textSize="16sp"/>
 
@@ -43,7 +43,7 @@
         android:background="#FFFFFF"
         android:hint=""
         android:padding="36dp"
-        android:text="Back text"
+        android:text="@string/back_text"
         android:textColor="#29c99d"
         android:textSize="16sp"
         android:visibility="invisible"/>
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:padding="6dp"
-            android:text="Skip"
+            android:text="@string/skip"
             android:textColor="#29c99d"
             android:textSize="24sp"
             android:onClick="onSkipClick"/>
@@ -72,7 +72,7 @@
             android:layout_alignParentRight="true"
             android:onClick="onShowAnswerClick"
             android:padding="6dp"
-            android:text="Show Answer"
+            android:text="@string/show_answer"
             android:textColor="#29c99d"
             android:textSize="24sp"/>
     </RelativeLayout>
@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="6dp"
-            android:text="0"
+            android:text="@string/_0"
             android:textColor="#29c99d"
             android:textSize="24sp"
             android:onClick="onScoreCardButtonClick"/>
@@ -102,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="6dp"
-            android:text="1"
+            android:text="@string/_1"
             android:textColor="#29c99d"
             android:textSize="24sp"
             android:onClick="onScoreCardButtonClick"/>
@@ -113,7 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="6dp"
-            android:text="2"
+            android:text="@string/_2"
             android:textColor="#29c99d"
             android:textSize="24sp"
             android:onClick="onScoreCardButtonClick"/>
@@ -124,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="6dp"
-            android:text="3"
+            android:text="@string/_3"
             android:textColor="#29c99d"
             android:textSize="24sp"
             android:onClick="onScoreCardButtonClick"/>
@@ -135,7 +135,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="6dp"
-            android:text="4"
+            android:text="@string/_4"
             android:textColor="#29c99d"
             android:textSize="24sp"
             android:onClick="onScoreCardButtonClick"/>
@@ -146,7 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="6dp"
-            android:text="5"
+            android:text="@string/_5"
             android:textColor="#29c99d"
             android:textSize="24sp"
             android:onClick="onScoreCardButtonClick"/>

@@ -32,7 +32,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:background="#FFFFFF"
-        android:text="Front:"
+        android:text="@string/front"
         android:textColor="#26c99d"
         android:textSize="24sp"/>
 
@@ -45,7 +45,7 @@
         android:layout_marginTop="15dp"
         android:layout_toRightOf="@+id/labelFrontText"
         android:background="#FFFFFF"
-        android:hint="Front of card"
+        android:hint="@string/front_of_card"
         android:inputType="textMultiLine"
         android:padding="4dp"
         android:textColor="#29c99d"/>
@@ -59,7 +59,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:background="#FFFFFF"
-        android:text="Back:"
+        android:text="@string/back"
         android:textColor="#26c99d"
         android:textSize="24sp"/>
 
@@ -75,7 +75,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
         android:background="#FFFFFF"
-        android:hint="Back of card"
+        android:hint="@string/back_of_card"
         android:inputType="textMultiLine"
         android:padding="4dp"
         android:textColor="#29c99d"/>
@@ -89,7 +89,7 @@
         android:layout_toLeftOf="@+id/tvEditTags"
         android:layout_toStartOf="@+id/tvEditTags"
         android:background="#FFFFFF"
-        android:text="Tags:"
+        android:text="@string/tags_label"
         android:textColor="#26c99d"
         android:textSize="24sp"/>
 
@@ -102,7 +102,7 @@
         android:layout_below="@+id/tvEditCardBackText"
         android:layout_marginTop="25dp"
         android:background="#FFFFFF"
-        android:hint="comma-separated"
+        android:hint="@string/comma_separated"
         android:inputType="text"
         android:textColor="#26c99d"
         android:textSize="20sp"/>
@@ -119,7 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
-            android:text="Card Stats:"
+            android:text="@string/card_stats"
             android:textColor="#26c99d"
             android:textSize="24sp"/>
 
@@ -131,7 +131,7 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textView10"
             android:background="#FFFFFF"
-            android:text="Last review:"
+            android:text="@string/last_review"
             android:textColor="#26c99d"
             android:textSize="14sp"/>
 
@@ -157,7 +157,7 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textView5"
             android:background="#FFFFFF"
-            android:text="Next review:"
+            android:text="@string/next_review"
             android:textColor="#26c99d"
             android:textSize="14sp"/>
 
@@ -183,7 +183,7 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/tvNextReviewLabel"
             android:background="#FFFFFF"
-            android:text="Total reviews:"
+            android:text="@string/total_reviews"
             android:textColor="#26c99d"
             android:textSize="14sp"/>
 
@@ -209,7 +209,7 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/tvTotalReviewsLabel"
             android:background="#FFFFFF"
-            android:text="Easiness:"
+            android:text="@string/easiness"
             android:textColor="#26c99d"
             android:textSize="14sp"/>
 
@@ -240,7 +240,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="onDeleteAction"
-            android:text="Delete"
+            android:text="@string/delete"
             android:textColor="#29c99d"
             android:textSize="18sp"
             android:focusable="false"/>
@@ -251,7 +251,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="onCancelAction"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:textColor="#29c99d"
             android:textSize="18sp"
             android:focusable="false"/>
@@ -262,7 +262,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="onSaveAction"
-            android:text="Save"
+            android:text="@string/save"
             android:textColor="#29c99d"
             android:textSize="18sp"
             android:focusable="false"/>

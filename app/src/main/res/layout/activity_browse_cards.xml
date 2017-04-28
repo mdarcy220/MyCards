@@ -29,7 +29,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tags:"
+            android:text="@string/tags_label"
             android:textSize="24sp"
             android:padding="4dp"/>
         <EditText
@@ -43,7 +43,7 @@
             android:id="@+id/btnFilterByTag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Filter"
+            android:text="@string/filter"
             android:onClick="onFilterByTagButtonClick"/>
     </LinearLayout>
 

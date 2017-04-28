@@ -32,7 +32,7 @@
             android:layout_alignBottom="@+id/editStartDate"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:text="Start date"
+            android:text="@string/start_date"
             android:textSize="20sp"/>
 
         <EditText
@@ -59,7 +59,7 @@
             android:layout_alignBaseline="@+id/editStartTime"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:text="Start time"
+            android:text="@string/start_time"
             android:textSize="20sp"/>
 
         <EditText
@@ -86,7 +86,7 @@
             android:layout_alignBaseline="@+id/editEndDate"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:text="End date"
+            android:text="@string/end_date"
             android:textSize="20sp"/>
 
         <EditText
@@ -113,7 +113,7 @@
             android:layout_alignBaseline="@+id/editEndTime"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:text="End time"
+            android:text="@string/end_time"
             android:textSize="20sp"/>
 
         <EditText
@@ -139,7 +139,7 @@
             android:layout_alignBaseline="@+id/editRepeatInterval"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:text="Repeat every"
+            android:text="@string/repeat_every"
             android:textSize="20sp"
             android:id="@+id/textView6"/>
 
@@ -151,7 +151,7 @@
             android:layout_alignBottom="@+id/editRepeatInterval"
             android:layout_toEndOf="@+id/editRepeatInterval"
             android:layout_toRightOf="@+id/editRepeatInterval"
-            android:text="days"
+            android:text="@string/days"
             android:textSize="20sp"/>
 
         <EditText
@@ -180,7 +180,7 @@
             android:layout_alignBaseline="@+id/editRepeatTimes"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:text="Repeat a total of"
+            android:text="@string/repeat_a_total_of"
             android:textSize="20sp"/>
 
         <TextView
@@ -191,7 +191,7 @@
             android:layout_alignBottom="@+id/editRepeatTimes"
             android:layout_toEndOf="@+id/editRepeatTimes"
             android:layout_toRightOf="@+id/editRepeatTimes"
-            android:text="times"
+            android:text="@string/times"
             android:textSize="20sp"/>
 
         <EditText
@@ -215,7 +215,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Delete"
+            android:text="@string/delete"
             android:textColor="#29c99d"
             android:textSize="18sp"
             android:onClick="onDeleteAction"/>
@@ -225,7 +225,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:textColor="#29c99d"
             android:textSize="18sp"
             android:onClick="onCancelAction"/>
@@ -235,7 +235,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Save"
+            android:text="@string/save"
             android:textColor="#29c99d"
             android:textSize="18sp"
             android:onClick="onSaveAction"/>

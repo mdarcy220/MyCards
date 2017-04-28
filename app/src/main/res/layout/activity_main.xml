@@ -12,13 +12,14 @@
             android:layout_gravity="center"
             android:layout_marginBottom="32dp"
             android:layout_marginTop="50dp"
-            android:src="@drawable/small_logo"/>
+            android:src="@drawable/small_logo"
+            android:contentDescription="@string/logo"/>
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tags to review (blank for all tags):"
+            android:text="@string/tags_to_review_blank_for_all_tags"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             />
 
@@ -27,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="tag1, tag2, ..."
+            android:hint="@string/tag1_tag2"
             android:inputType="textPersonName"/>
 
         <Button
@@ -39,7 +40,7 @@
             android:background="#FFFFFF"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:text="Start Review"
+            android:text="@string/start_review"
             android:textColor="#29c99d"
             android:onClick="onStartReviewBtnClick"/>
 
@@ -52,7 +53,7 @@
             android:background="#FFFFFF"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:text="Browse Cards"
+            android:text="@string/browse_cards"
             android:textColor="#29c99d"
             android:onClick="onBrowseCardsBtnClick"/>
 
@@ -65,7 +66,7 @@
             android:background="#FFFFFF"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:text="Manage Settings"
+            android:text="@string/manage_settings"
             android:textColor="#29c99d"
             android:onClick="onSettingsBtnClick"/>
 
