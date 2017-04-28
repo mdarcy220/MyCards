@@ -14,6 +14,13 @@
  * limitations under the License.
  */
 
+/*
+ * Mike D'Arcy (2553280)
+ * Brianne O'Neil (2583119)
+ * CIS 470 Final Project - Group 13
+ * 28 April 2017
+ */
+
 package com.group13.androidsdk.mycards;
 
 import android.content.BroadcastReceiver;
@@ -21,7 +28,7 @@ import android.content.Context;
 import android.content.Intent;
 
 /**
- * Created by Mike D'Arcy on 4/25/17.
+ * Created by Mike D'Arcy.
  */
 
 public class AutostartReceiver extends BroadcastReceiver {
